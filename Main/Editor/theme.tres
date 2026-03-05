@@ -1,0 +1,13 @@
+[gd_resource type="Theme" format=3 uid="uid://dt51r7jbd830n"]
+
+[ext_resource type="FontFile" uid="uid://d2qqtukcmeo2p" path="res://Main/Assets/font.ttf" id="1_xt60p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ih0wh"]
+bg_color = Color(0.18717611, 0.18717617, 0.18717602, 1)
+border_width_bottom = 2
+border_color = Color(0.11764706, 0.11764706, 0.11764706, 0.49411765)
+
+[resource]
+default_font = ExtResource("1_xt60p")
+default_font_size = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ih0wh")
