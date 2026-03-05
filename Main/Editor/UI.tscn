@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://co88ub54mji2w"]
 
 [ext_resource type="Theme" uid="uid://dt51r7jbd830n" path="res://Main/Editor/theme.tres" id="1_te7nb"]
+[ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
 
 [node name="Ui" type="Control" unique_id=944202775]
 layout_mode = 3
@@ -10,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Tools" type="Panel" parent="." unique_id=72354182]
+[node name="Main" type="Panel" parent="." unique_id=72354182]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -19,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Toolbar" type="Panel" parent="Tools" unique_id=976015989]
+[node name="Toolbar" type="Panel" parent="Main" unique_id=976015989]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_te7nb")
 
-[node name="Objects" type="Panel" parent="Tools" unique_id=131596055]
+[node name="Objects" type="Panel" parent="Main" unique_id=131596055]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +42,7 @@ grow_vertical = 2
 scale = Vector2(0.25, 1)
 theme = ExtResource("1_te7nb")
 
-[node name="Label2" type="Label" parent="Tools/Objects" unique_id=1066141354]
+[node name="Title" type="Label" parent="Main/Objects" unique_id=1066141354]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 30.0
@@ -52,7 +53,7 @@ text = "Scene"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Properties" type="Panel" parent="Tools" unique_id=219278755]
+[node name="Properties" type="Panel" parent="Main" unique_id=219278755]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,7 +64,7 @@ grow_vertical = 2
 scale = Vector2(0.25, 1)
 theme = ExtResource("1_te7nb")
 
-[node name="Label" type="Label" parent="Tools/Properties" unique_id=692583819]
+[node name="Title" type="Label" parent="Main/Properties" unique_id=692583819]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 30.0
@@ -73,3 +74,23 @@ theme = ExtResource("1_te7nb")
 text = "Properties"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Viewport" type="SubViewportContainer" parent="Main" unique_id=2011329771]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 288.0
+offset_top = 58.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="Main/Viewport" unique_id=753948555]
+handle_input_locally = false
+size = Vector2i(865, 591)
+render_target_update_mode = 4
+
+[node name="Scene" parent="Main/Viewport/Viewport" unique_id=2092636286 instance=ExtResource("2_30t0y")]

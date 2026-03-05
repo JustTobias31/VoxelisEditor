@@ -1,3 +1,16 @@
 [gd_scene format=3 uid="uid://dks5tqhcp416"]
 
+[ext_resource type="Script" uid="uid://uqk4h1r3vu5k" path="res://Main/Editor/Scripts/Camera.gd" id="1_yh5la"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yh5la"]
+
 [node name="Node3D" type="Node3D" unique_id=2092636286]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=893656239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.893112, 35.45157)
+current = true
+script = ExtResource("1_yh5la")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1026291036]
+transform = Transform3D(86.976906, 0, 0, 0, 1, 0, 0, 0, 99.52895, 0, 0, 0)
+mesh = SubResource("BoxMesh_yh5la")

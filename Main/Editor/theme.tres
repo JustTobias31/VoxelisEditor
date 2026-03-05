@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ih0wh"]
 bg_color = Color(0.18717611, 0.18717617, 0.18717602, 1)
 border_width_bottom = 2
-border_color = Color(0.11764706, 0.11764706, 0.11764706, 0.49411765)
+border_color = Color(0.2159017, 0.21590173, 0.2159017, 1)
 
 [resource]
 default_font = ExtResource("1_xt60p")
