@@ -2,15 +2,40 @@
 
 [ext_resource type="Script" uid="uid://uqk4h1r3vu5k" path="res://Main/Editor/Scripts/Camera.gd" id="1_yh5la"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_yh5la"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yh5la"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_energy_multiplier = 0.5
+ground_bottom_color = Color(0.38431373, 0.45490196, 0.54901963, 1)
+ground_curve = 2.0793667
+ground_energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_2w1kt"]
+sky_material = SubResource("ProceduralSkyMaterial_yh5la")
+
+[sub_resource type="Environment" id="Environment_qvhan"]
+background_mode = 2
+sky = SubResource("Sky_2w1kt")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eunhr"]
+size = Vector2(100, 100)
 
 [node name="Node3D" type="Node3D" unique_id=2092636286]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1404371220]
+transform = Transform3D(-0.8660254, -0.50000006, -2.1855696e-08, 0, -4.371139e-08, 1, -0.50000006, 0.8660254, 3.7855173e-08, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=727675055]
+environment = SubResource("Environment_qvhan")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=893656239]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.893112, 35.45157)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.49222136, 86.35431, 0.29448056)
 current = true
 script = ExtResource("1_yh5la")
 
-[node name="Floor" type="MeshInstance3D" parent="." unique_id=1026291036]
-transform = Transform3D(86.976906, 0, 0, 0, 1, 0, 0, 0, 99.52895, 0, 0, 0)
-mesh = SubResource("BoxMesh_yh5la")
+[node name="Scene" type="Node3D" parent="." unique_id=946024400]
+
+[node name="Floor" type="MeshInstance3D" parent="Scene" unique_id=1026291036]
+transform = Transform3D(1, 0, 0, 0, 0.011, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("PlaneMesh_eunhr")

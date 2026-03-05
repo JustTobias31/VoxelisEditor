@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://co88ub54mji2w"]
 
 [ext_resource type="Theme" uid="uid://dt51r7jbd830n" path="res://Main/Editor/theme.tres" id="1_te7nb"]
+[ext_resource type="Script" uid="uid://dhquder0smgor" path="res://Main/Editor/Scripts/ObjMain.gd" id="2_0o37r"]
 [ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
 
 [node name="Ui" type="Control" unique_id=944202775]
@@ -29,6 +30,15 @@ offset_bottom = -588.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_te7nb")
+
+[node name="Button" type="Button" parent="Main/Toolbar" unique_id=452284215]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 46.0
+text = "test"
+script = ExtResource("2_0o37r")
 
 [node name="Objects" type="Panel" parent="Main" unique_id=131596055]
 layout_mode = 1
@@ -91,6 +101,8 @@ stretch = true
 [node name="Viewport" type="SubViewport" parent="Main/Viewport" unique_id=753948555]
 handle_input_locally = false
 size = Vector2i(865, 591)
+size_2d_override = Vector2i(1024, 1024)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="Scene" parent="Main/Viewport/Viewport" unique_id=2092636286 instance=ExtResource("2_30t0y")]

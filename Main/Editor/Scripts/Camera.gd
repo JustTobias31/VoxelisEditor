@@ -17,9 +17,8 @@ func _input(event):
 		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotation.y -= event.relative.x * sensitivity
-		camera_pitch -= event.relative.y * sensitivity
-		camera_pitch = clamp(camera_pitch, deg_to_rad(-90), deg_to_rad(90))
-		rotation.x = camera_pitch
+		rotation.x -= event.relative.y * sensitivity
+		rotation.x = clamp(rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			speed *= 1.1
