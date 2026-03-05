@@ -8,4 +8,4 @@ Want to make your own 3D game in Catweb? This tool is made for you.
 - Add your own textures
 - Export your game into CatWeb
 
-Thanks to __Voxelis__ (by Jexx), we have 3D in Catweb. This tool just allows you to easily make the 3D Games.
+Thanks to __Voxelis__ (by Jexx) for giving me the only reason to make this project.
