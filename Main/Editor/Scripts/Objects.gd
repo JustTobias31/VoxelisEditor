@@ -48,11 +48,12 @@ func setProperty(obj : editor_Main, key, value):
 	propchanged.emit(obj,key,value)
 
 func select(id):
-	if selected != 0:
+	if selected != 0 and objects[selected].model:
 		objects[selected].model.get_node("Main").material_overlay.set_shader_parameter("highlight", false)
 	if id:
 		selected = id
-		objects[selected].model.get_node("Main").material_overlay.set_shader_parameter("highlight", true)
+		if objects[selected].model:
+			objects[selected].model.get_node("Main").material_overlay.set_shader_parameter("highlight", true)
 	else:
 		selected = 0
 	reselect.emit(id)

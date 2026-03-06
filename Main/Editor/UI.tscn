@@ -173,7 +173,6 @@ theme = ExtResource("1_te7nb")
 allow_search = false
 enable_drag_unfolding = false
 hide_root = true
-drop_mode_flags = 1
 
 [node name="Properties" type="Panel" parent="Main" unique_id=219278755]
 layout_mode = 1
