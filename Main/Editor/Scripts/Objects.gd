@@ -10,39 +10,39 @@ var selected = 0
 
 signal created
 signal propchanged
-signal reparent
 signal reselect
 
 #######################################
 func parent(obj : editor_Main, p : editor_Main):
 	p.children.append(obj.id)
-	obj.parent=p
-	reparent.emit(obj,p)
+	obj.props.parent.value=p
 
 func create(obj : editor_Main, p : editor_Main=null):
 	var uid = randi_range(0,99999999)
 	var model : Node3D = obj.model
 	obj.id=uid
+	obj.description=null
+	objects[uid]=obj
+	
 	if obj.model:
 		obj.model.name=str(uid)
 		get_tree().get_root().add_child.call_deferred(obj.model)
+	if p:
+		setProperty(obj,"parent",p)
 	for i in obj.props:
 		var v = obj.props[i]
 		if v.has("handler"):
 			v.handler.call(v.value, obj.model)
-	objects[uid]=obj
-	obj.description=null
-	created.emit(obj,p)
 	
-	if p:
-		p.children.append(obj.id)
-		obj.parent=p
+	created.emit(obj,p)
 	
 	return uid
 	
 func setProperty(obj : editor_Main, key, value):
 	var prop = obj.props[key]
 	prop.value=value
+	if key == "parent":
+		objects[value.id].children.append(obj.id)
 	if prop.has("handler"):
 		prop.handler.call(value,obj.model)
 	propchanged.emit(obj,key,value)
@@ -57,12 +57,20 @@ func select(id):
 		selected = 0
 	reselect.emit(id)
 #######################################
+
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
-	var scenefloor = objects[create(editor_Cube.new())]
+	var scene = objects[create(editor_3D.new())]
+	setProperty(scene,"name","Scene")
+	
+	var scenefloor = objects[create(editor_Cube.new(),scene)]
 	setProperty(scenefloor,"size",Vector3(100,1,100))
 	setProperty(scenefloor,"color",Color.SLATE_GRAY)
 	setProperty(scenefloor,"name","Floor")
 	
-	create(editor_Cube.new(),scenefloor)
+	var cube = objects[create(editor_Cube.new(),scene)]
+	var subcube = objects[create(editor_Cube.new())]
+	setProperty(subcube,"position",Vector3(0,100,0))
+	await get_tree().create_timer(3).timeout
+	setProperty(subcube,"parent",cube)
 	

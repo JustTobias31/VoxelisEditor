@@ -58,7 +58,6 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme = SubResource("Theme_suv3m")
-alignment = 1
 
 [node name="File" type="Button" parent="Main/Toolbar/Contents" unique_id=452284215]
 custom_minimum_size = Vector2(60, 0)
