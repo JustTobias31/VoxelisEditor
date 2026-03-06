@@ -4,7 +4,6 @@ var sensitivity = 0.005
 var camera_pitch = 0
 var mousepos = null
 
-
 func _process(_delta: float) -> void:
 	if !current:
 		return
@@ -32,4 +31,19 @@ func _input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				get_viewport().warp_mouse(mousepos)
 				mousepos = null
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			var space_state = get_world_3d().direct_space_state
+			var mouse = get_viewport().get_mouse_position()
+
+			var origin = project_ray_origin(mouse)
+			var end = origin + project_ray_normal(mouse) * 1000
+			var query = PhysicsRayQueryParameters3D.create(origin, end)
+			query.collide_with_areas = true
+			
+			var result = space_state.intersect_ray(query)
+			
+			if result.has("collider"):
+				Objects.select(int(result.collider.get_parent().get_parent().name))
+			else:
+				Objects.select(null)
 		speed = clamp(speed, 0.005, 2)

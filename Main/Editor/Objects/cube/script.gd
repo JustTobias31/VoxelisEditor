@@ -3,6 +3,14 @@ class_name editor_Cube
 
 func _init():
 	super()
+	props["color"] = {
+		"locked"= false,
+		"value"= Color.GRAY,
+		"type"= "vec3",
+		"handler"= func(val: Color, obj: Node3D):
+			obj.get_node("Main").material_override.albedo_color=val
+	}
+	deletable = true
 	description = "Cube"
-	color = Color.ORANGE_RED
 	model=load("res://Main/Editor/Objects/cube/model.tscn").instantiate()
+	

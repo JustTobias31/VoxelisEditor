@@ -18,3 +18,4 @@ var icon="main.svg"
 var color = Color.WHITE
 var parent = ""
 var children = []
+var deletable = false

@@ -17,13 +17,14 @@ background_mode = 2
 sky = SubResource("Sky_2w1kt")
 tonemap_mode = 2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_eunhr"]
-size = Vector2(100, 100)
+[sub_resource type="BoxMesh" id="BoxMesh_yh5la"]
+size = Vector3(10, 10, 10)
 
 [node name="Node3D" type="Node3D" unique_id=2092636286]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1404371220]
-transform = Transform3D(-0.8660254, -0.50000006, -2.1855696e-08, 0, -4.371139e-08, 1, -0.50000006, 0.8660254, 3.7855173e-08, 0, 0, 0)
+transform = Transform3D(-0.6998913, -0.40408248, -0.5889567, -0.51005137, -0.29447845, 0.8081648, -0.5000001, 0.8660255, 3.804157e-08, 0, 0, 0)
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=727675055]
@@ -34,8 +35,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.49
 current = true
 script = ExtResource("1_yh5la")
 
-[node name="Scene" type="Node3D" parent="." unique_id=946024400]
+[node name="Ray" type="RayCast3D" parent="Camera3D" unique_id=873251477]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+target_position = Vector3(0, -100, 0)
+collide_with_areas = true
 
-[node name="Floor" type="MeshInstance3D" parent="Scene" unique_id=1026291036]
-transform = Transform3D(1, 0, 0, 0, 0.011, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("PlaneMesh_eunhr")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=544983253]
+mesh = SubResource("BoxMesh_yh5la")
