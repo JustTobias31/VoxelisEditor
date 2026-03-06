@@ -23,6 +23,8 @@ func _init():
 		"handler"= func(val: bool, obj: Node3D):
 			obj.visible = val
 	}
-
+	
+	props.name.value="3D"
+	props.classname.value="3D"
+	
 	description = "Any object that can get rendered in the 3D space"
-	color = Color.RED

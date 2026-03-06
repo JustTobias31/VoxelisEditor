@@ -1,30 +1,51 @@
 extends Node
 
+var objindex = [
+	editor_Main,
+	editor_3D,
+	editor_Cube
+]
 var objects = {}
 var selected = 0
 
+signal created
+signal propchanged
+signal reparent
+signal reselect
+
 #######################################
-func create(obj : editor_Main,parent=null):
+func parent(obj : editor_Main, p : editor_Main):
+	p.children.append(obj.id)
+	obj.parent=p
+	reparent.emit(obj,p)
+
+func create(obj : editor_Main, p : editor_Main=null):
 	var uid = randi_range(0,99999999)
 	var model : Node3D = obj.model
+	obj.id=uid
 	if obj.model:
 		obj.model.name=str(uid)
 		get_tree().get_root().add_child.call_deferred(obj.model)
-	if parent:
-		objects[parent].children.append(uid)
-		objects[uid].parent=parent
 	for i in obj.props:
 		var v = obj.props[i]
 		if v.has("handler"):
 			v.handler.call(v.value, obj.model)
 	objects[uid]=obj
 	obj.description=null
+	created.emit(obj,p)
+	
+	if p:
+		p.children.append(obj.id)
+		obj.parent=p
+	
 	return uid
 	
 func setProperty(obj : editor_Main, key, value):
 	var prop = obj.props[key]
 	prop.value=value
-	prop.handler.call(value,obj.model)
+	if prop.has("handler"):
+		prop.handler.call(value,obj.model)
+	propchanged.emit(obj,key,value)
 
 func select(id):
 	if selected != 0:
@@ -34,11 +55,14 @@ func select(id):
 		objects[selected].model.get_node("Main").material_overlay.set_shader_parameter("highlight", true)
 	else:
 		selected = 0
+	reselect.emit(id)
 #######################################
 func _ready() -> void:
+	await get_tree().create_timer(0.1).timeout
 	var scenefloor = objects[create(editor_Cube.new())]
 	setProperty(scenefloor,"size",Vector3(100,1,100))
 	setProperty(scenefloor,"color",Color.SLATE_GRAY)
+	setProperty(scenefloor,"name","Floor")
 	
-	create(editor_Cube.new())
+	create(editor_Cube.new(),scenefloor)
 	

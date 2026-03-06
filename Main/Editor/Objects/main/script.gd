@@ -14,8 +14,7 @@ var props = {
 	}
 var model = null
 var description = "Root object that's used by every other object"
-var icon="main.svg"
-var color = Color.WHITE
 var parent = ""
 var children = []
 var deletable = false
+var id = 0
