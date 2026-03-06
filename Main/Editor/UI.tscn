@@ -3,10 +3,11 @@
 [ext_resource type="Theme" uid="uid://dt51r7jbd830n" path="res://Main/Editor/theme.tres" id="1_te7nb"]
 [ext_resource type="Script" uid="uid://dhquder0smgor" path="res://Main/Editor/Scripts/ObjMain.gd" id="2_0o37r"]
 [ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
-[ext_resource type="Texture2D" uid="uid://c3m2ap50jbxy1" path="res://Main/Assets/icons/Vector.svg" id="3_c5412"]
+[ext_resource type="Texture2D" uid="uid://b128u0b7lcv82" path="res://Main/Assets/icons/add.svg" id="3_c5412"]
+[ext_resource type="Texture2D" uid="uid://35hfnv7rcns1" path="res://Main/Editor/Objects/cube/icon.svg" id="4_suv3m"]
 
 [sub_resource type="Theme" id="Theme_suv3m"]
-BoxContainer/constants/separation = 5
+BoxContainer/constants/separation = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccg01"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -40,13 +41,12 @@ theme = ExtResource("1_te7nb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main/Toolbar" unique_id=224277668]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 15.0
-offset_right = -10.0
-offset_bottom = -15.0
+anchor_bottom = 0.5
+offset_top = -13.0
+offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -70,7 +70,21 @@ text = "Edit
 "
 script = ExtResource("2_0o37r")
 
-[node name="Object" type="VSeparator" parent="Main/Toolbar/HBoxContainer" unique_id=486229400]
+[node name="Export" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=2007156475]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "Export
+
+"
+script = ExtResource("2_0o37r")
+
+[node name="Transform" type="VSeparator" parent="Main/Toolbar/HBoxContainer" unique_id=486229400]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Object" type="VSeparator" parent="Main/Toolbar/HBoxContainer" unique_id=1194232515]
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -84,6 +98,20 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
 text = "
 "
 icon = ExtResource("3_c5412")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_0o37r")
+
+[node name="cube" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=362470139]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "
+"
+icon = ExtResource("4_suv3m")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_0o37r")

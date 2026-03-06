@@ -6,8 +6,7 @@ func info(path):
 	var obj = load(path + "/script.gd").new()
 	return obj
 
-func create(path,parent=null):
-	var obj = info(path)
+func create(obj,parent=null):
 	var uid = randi_range(0,99999999)
 	if obj.model:
 		get_tree().get_root().add_child.call_deferred(obj.model)
@@ -22,4 +21,4 @@ func create(path,parent=null):
 	return uid
 
 func _ready() -> void:
-	create("res://Main/Editor/Objects/cube")
+	create(editor_Cube.new())
