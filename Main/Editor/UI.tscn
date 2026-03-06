@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://co88ub54mji2w"]
 
+[ext_resource type="Script" uid="uid://dcc8hadickpaw" path="res://Main/Editor/Scripts/UI/Main.gd" id="1_suv3m"]
 [ext_resource type="Theme" uid="uid://dt51r7jbd830n" path="res://Main/Editor/theme.tres" id="1_te7nb"]
 [ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
 [ext_resource type="Texture2D" uid="uid://b128u0b7lcv82" path="res://Main/Assets/icons/add.svg" id="3_c5412"]
@@ -33,6 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_suv3m")
 
 [node name="Toolbar" type="Panel" parent="Main" unique_id=976015989]
 layout_mode = 1
@@ -44,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_te7nb")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Main/Toolbar" unique_id=224277668]
+[node name="Contents" type="HBoxContainer" parent="Main/Toolbar" unique_id=224277668]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -58,14 +60,14 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 theme = SubResource("Theme_suv3m")
 alignment = 1
 
-[node name="File" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=452284215]
+[node name="File" type="Button" parent="Main/Toolbar/Contents" unique_id=452284215]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
 text = "File"
 
-[node name="Edit" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=8310985]
+[node name="Edit" type="Button" parent="Main/Toolbar/Contents" unique_id=8310985]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
@@ -73,7 +75,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
 text = "Edit
 "
 
-[node name="Export" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=2007156475]
+[node name="Export" type="Button" parent="Main/Toolbar/Contents" unique_id=2007156475]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
@@ -82,19 +84,20 @@ text = "Export
 
 "
 
-[node name="Transform" type="VSeparator" parent="Main/Toolbar/HBoxContainer" unique_id=486229400]
+[node name="Transform" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=486229400]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Object" type="VSeparator" parent="Main/Toolbar/HBoxContainer" unique_id=1194232515]
+[node name="Object" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=1194232515]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Add" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=4071011]
+[node name="Add" type="Button" parent="Main/Toolbar/Contents" unique_id=4071011]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Shows the "
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
@@ -104,7 +107,7 @@ icon = ExtResource("3_c5412")
 icon_alignment = 1
 expand_icon = true
 
-[node name="cube" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=362470139]
+[node name="cube" type="Button" parent="Main/Toolbar/Contents" unique_id=362470139]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -140,6 +143,24 @@ theme = ExtResource("1_te7nb")
 text = "Scene"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Tree" type="Tree" parent="Main/Objects" unique_id=472587741]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 30.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 1)
+pivot_offset = Vector2(10, 0)
+theme = ExtResource("1_te7nb")
+allow_search = false
+enable_drag_unfolding = false
+hide_root = true
+drop_mode_flags = 1
 
 [node name="Properties" type="Panel" parent="Main" unique_id=219278755]
 layout_mode = 1
@@ -178,9 +199,11 @@ stretch = true
 
 [node name="Viewport" type="SubViewport" parent="Main/Viewport" unique_id=753948555]
 handle_input_locally = false
+oversampling = false
 size = Vector2i(865, 591)
 size_2d_override = Vector2i(1024, 1024)
 size_2d_override_stretch = true
+render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="Scene" parent="Main/Viewport/Viewport" unique_id=2092636286 instance=ExtResource("2_30t0y")]

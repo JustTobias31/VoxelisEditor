@@ -7,7 +7,101 @@ bg_color = Color(0.18717611, 0.18717617, 0.18717602, 1)
 border_width_bottom = 2
 border_color = Color(0.2159017, 0.21590173, 0.2159017, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rh60u"]
+bg_color = Color(0.6, 0.6, 0.6, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvieb"]
+bg_color = Color(0.50980395, 0.6117647, 0.69803923, 0.47058824)
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xt60p"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0shiu"]
+bg_color = Color(0.50980395, 0.6117647, 0.69803923, 0.39215687)
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
+
 [resource]
 default_font = ExtResource("1_xt60p")
 default_font_size = 0
 Panel/styles/panel = SubResource("StyleBoxFlat_ih0wh")
+Tree/colors/children_hl_line_color = Color(0, 0, 0, 1)
+Tree/colors/custom_button_font_highlight = Color(0, 0, 0, 1)
+Tree/colors/drop_position_color = Color(1, 1, 1, 0)
+Tree/colors/font_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+Tree/colors/font_disabled_color = Color(0.65423185, 0.65423214, 0.6542318, 1)
+Tree/colors/font_hovered_color = Color(1, 1, 1, 1)
+Tree/colors/font_hovered_dimmed_color = Color(1, 1, 1, 1)
+Tree/colors/font_hovered_selected_color = Color(1, 1, 1, 1)
+Tree/colors/font_outline_color = Color(0, 0, 0, 0)
+Tree/colors/font_selected_color = Color(0.84313726, 0.84313726, 0.84313726, 1)
+Tree/colors/guide_color = Color(0, 0, 0, 0)
+Tree/colors/parent_hl_line_color = Color(0, 0, 0, 1)
+Tree/colors/relationship_line_color = Color(0, 0, 0, 1)
+Tree/colors/scroll_hint_color = Color(0, 0, 0, 1)
+Tree/colors/title_button_color = Color(0, 0, 0, 1)
+Tree/constants/button_margin = 0
+Tree/constants/check_h_separation = 0
+Tree/constants/children_hl_line_width = 0
+Tree/constants/dragging_unfold_wait_msec = 0
+Tree/constants/draw_guides = 0
+Tree/constants/draw_relationship_lines = 0
+Tree/constants/h_separation = 0
+Tree/constants/icon_h_separation = 0
+Tree/constants/icon_max_width = 0
+Tree/constants/inner_item_margin_bottom = 0
+Tree/constants/inner_item_margin_left = 0
+Tree/constants/inner_item_margin_right = 0
+Tree/constants/inner_item_margin_top = 0
+Tree/constants/item_margin = 15
+Tree/constants/outline_size = 0
+Tree/constants/parent_hl_line_margin = 0
+Tree/constants/parent_hl_line_width = 0
+Tree/constants/relationship_line_width = 0
+Tree/constants/scroll_border = 0
+Tree/constants/scroll_speed = 0
+Tree/constants/scrollbar_h_separation = 0
+Tree/constants/scrollbar_margin_bottom = 0
+Tree/constants/scrollbar_margin_left = 0
+Tree/constants/scrollbar_margin_right = 0
+Tree/constants/scrollbar_margin_top = 0
+Tree/constants/scrollbar_v_separation = 0
+Tree/constants/v_separation = 1
+Tree/font_sizes/font_size = 16
+Tree/font_sizes/title_button_font_size = 16
+Tree/fonts/font = ExtResource("1_xt60p")
+Tree/fonts/title_button_font = ExtResource("1_xt60p")
+Tree/icons/arrow = null
+Tree/icons/arrow_collapsed = null
+Tree/icons/arrow_collapsed_mirrored = null
+Tree/icons/checked = null
+Tree/icons/checked_disabled = null
+Tree/icons/indeterminate = null
+Tree/icons/indeterminate_disabled = null
+Tree/icons/scroll_hint = null
+Tree/icons/select_arrow = null
+Tree/icons/unchecked = null
+Tree/icons/unchecked_disabled = null
+Tree/icons/updown = null
+Tree/styles/button_hover = null
+Tree/styles/button_pressed = null
+Tree/styles/cursor = null
+Tree/styles/cursor_unfocused = null
+Tree/styles/custom_button = null
+Tree/styles/custom_button_hover = null
+Tree/styles/custom_button_pressed = null
+Tree/styles/focus = null
+Tree/styles/hovered = SubResource("StyleBoxFlat_rh60u")
+Tree/styles/hovered_dimmed = null
+Tree/styles/hovered_selected = SubResource("StyleBoxFlat_tvieb")
+Tree/styles/hovered_selected_focus = null
+Tree/styles/panel = SubResource("StyleBoxFlat_xt60p")
+Tree/styles/selected = SubResource("StyleBoxFlat_0shiu")
+Tree/styles/selected_focus = null
+Tree/styles/title_button_hover = null
+Tree/styles/title_button_normal = null
+Tree/styles/title_button_pressed = null
