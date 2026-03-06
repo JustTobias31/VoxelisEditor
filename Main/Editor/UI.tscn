@@ -54,7 +54,7 @@ theme = SubResource("Theme_suv3m")
 alignment = 1
 
 [node name="File" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=452284215]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
@@ -62,7 +62,7 @@ text = "File"
 script = ExtResource("2_0o37r")
 
 [node name="Edit" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=8310985]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
@@ -71,7 +71,7 @@ text = "Edit
 script = ExtResource("2_0o37r")
 
 [node name="Export" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=2007156475]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
