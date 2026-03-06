@@ -11,6 +11,11 @@ var props = {
 			"value"="main",
 			"type"="str"
 		},
+		"parent" = {
+			"locked"=false,
+			"value"=null,
+			"type"="obj",
+		},
 	}
 var model = null
 var description = "Root object that's used by every other object"

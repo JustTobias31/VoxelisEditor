@@ -6,11 +6,17 @@ var objlist = {}
 
 func create_tree_item(_item, _parent_item):
 	var item : TreeItem = tree.create_item(_parent_item)
+	item.set_meta("id",_item.id)
+	item.set_icon(0, load("res://Main/Editor/Objects/%s/icon.svg" % _item.props.classname.value))
+	item.set_icon_max_width(0, 10)
 	item.set_text(0, _item.props.name.value)
 	return item
 
-func NewObject(obj, parent):
+func NewObject(obj,parent):
 	var item
+	if objlist.has(obj.id):
+		objlist[obj.id].free()
+	
 	if parent:
 		item = create_tree_item(obj, objlist[parent.id])
 	else:
@@ -24,8 +30,16 @@ func _ready() -> void:
 	Objects.propchanged.connect(func(obj:editor_Main,prop,val):
 		if prop == "name":
 			objlist[obj.id].set_text(0,val)
+		elif prop == "parent":
+			NewObject(obj,val)
 	)
 	Objects.reselect.connect(func(id):
 		tree.deselect_all()
-		tree.set_selected(objlist[id],0)
+		if id:
+			tree.set_selected(objlist[id],0)
 	)
+	tree.cell_selected.connect(func():
+		if tree.get_selected().get_meta("id") and Objects.objects[tree.get_selected().get_meta("id")] and Objects.selected != tree.get_selected().get_meta("id"):
+			Objects.select(tree.get_selected().get_meta("id"))
+	)
+	

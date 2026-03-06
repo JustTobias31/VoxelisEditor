@@ -3,8 +3,11 @@
 [ext_resource type="Script" uid="uid://uqk4h1r3vu5k" path="res://Main/Editor/Scripts/Camera.gd" id="1_yh5la"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yh5la"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_energy_multiplier = 0.5
 ground_bottom_color = Color(0.38431373, 0.45490196, 0.54901963, 1)
 ground_curve = 0.045947976
+ground_energy_multiplier = 0.5
 
 [sub_resource type="Sky" id="Sky_2w1kt"]
 sky_material = SubResource("ProceduralSkyMaterial_yh5la")
@@ -12,11 +15,12 @@ sky_material = SubResource("ProceduralSkyMaterial_yh5la")
 [sub_resource type="Environment" id="Environment_qvhan"]
 background_mode = 2
 sky = SubResource("Sky_2w1kt")
+tonemap_mode = 2
 
 [node name="Node3D" type="Node3D" unique_id=2092636286]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1404371220]
-transform = Transform3D(-0.6998913, -0.40408248, -0.5889567, -0.51005137, -0.29447845, 0.8081648, -0.5000001, 0.8660255, 3.804157e-08, 0, 0, 0)
+transform = Transform3D(-0.6998912, -0.4040823, -0.58895653, -0.51005125, -0.2944783, 0.8081647, -0.5, 0.8660254, 8.142146e-08, 0, 0, 0)
 light_energy = 0.5
 shadow_enabled = true
 
