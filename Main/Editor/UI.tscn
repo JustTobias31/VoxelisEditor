@@ -3,6 +3,13 @@
 [ext_resource type="Theme" uid="uid://dt51r7jbd830n" path="res://Main/Editor/theme.tres" id="1_te7nb"]
 [ext_resource type="Script" uid="uid://dhquder0smgor" path="res://Main/Editor/Scripts/ObjMain.gd" id="2_0o37r"]
 [ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
+[ext_resource type="Texture2D" uid="uid://c3m2ap50jbxy1" path="res://Main/Assets/icons/Vector.svg" id="3_c5412"]
+
+[sub_resource type="Theme" id="Theme_suv3m"]
+BoxContainer/constants/separation = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccg01"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Ui" type="Control" unique_id=944202775]
 layout_mode = 3
@@ -31,13 +38,54 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_te7nb")
 
-[node name="Button" type="Button" parent="Main/Toolbar" unique_id=452284215]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 8.0
-offset_right = 264.0
-offset_bottom = 46.0
-text = "test"
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/Toolbar" unique_id=224277668]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 15.0
+offset_right = -10.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = SubResource("Theme_suv3m")
+alignment = 1
+
+[node name="File" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=452284215]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "File"
+script = ExtResource("2_0o37r")
+
+[node name="Edit" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=8310985]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "Edit
+"
+script = ExtResource("2_0o37r")
+
+[node name="Object" type="VSeparator" parent="Main/Toolbar/HBoxContainer" unique_id=486229400]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Add" type="Button" parent="Main/Toolbar/HBoxContainer" unique_id=4071011]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "
+"
+icon = ExtResource("3_c5412")
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("2_0o37r")
 
 [node name="Objects" type="Panel" parent="Main" unique_id=131596055]
