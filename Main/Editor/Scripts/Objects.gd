@@ -69,8 +69,5 @@ func _ready() -> void:
 	setProperty(scenefloor,"name","Floor")
 	
 	var cube = objects[create(editor_Cube.new(),scene)]
-	var subcube = objects[create(editor_Cube.new())]
-	setProperty(subcube,"position",Vector3(0,100,0))
-	await get_tree().create_timer(3).timeout
-	setProperty(subcube,"parent",cube)
+	setProperty(cube,"position",Vector3(0,5.5,0))
 	

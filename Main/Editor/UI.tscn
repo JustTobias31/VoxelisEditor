@@ -120,6 +120,20 @@ icon = ExtResource("4_suv3m")
 icon_alignment = 1
 expand_icon = true
 
+[node name="group" type="Button" parent="Main/Toolbar/Contents" unique_id=1508916303]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "
+"
+icon = ExtResource("4_suv3m")
+icon_alignment = 1
+expand_icon = true
+
 [node name="Objects" type="Panel" parent="Main" unique_id=131596055]
 layout_mode = 1
 anchors_preset = 15

@@ -4,7 +4,7 @@ class_name editor_3D
 func _init():
 	props["position"] = {
 		"locked"= false,
-		"value"= Vector3(0, 5, 0),
+		"value"= Vector3(0, 0, 0),
 		"type"= "vec3",
 		"handler"= func(val: Vector3, obj: Node3D):
 			if obj:

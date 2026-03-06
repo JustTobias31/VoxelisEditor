@@ -6,6 +6,7 @@ var objlist = {}
 
 func create_tree_item(_item, _parent_item):
 	var item : TreeItem = tree.create_item(_parent_item)
+	item.set_meta("id",_item.id)
 	item.set_icon(0, load("res://Main/Editor/Objects/%s/icon.svg" % _item.props.classname.value))
 	item.set_icon_max_width(0, 10)
 	item.set_text(0, _item.props.name.value)
@@ -37,3 +38,8 @@ func _ready() -> void:
 		if id:
 			tree.set_selected(objlist[id],0)
 	)
+	tree.cell_selected.connect(func():
+		if tree.get_selected().get_meta("id") and Objects.objects[tree.get_selected().get_meta("id")] and Objects.selected != tree.get_selected().get_meta("id"):
+			Objects.select(tree.get_selected().get_meta("id"))
+	)
+	
