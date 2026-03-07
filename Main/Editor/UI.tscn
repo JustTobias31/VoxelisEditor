@@ -4,7 +4,11 @@
 [ext_resource type="Theme" uid="uid://dt51r7jbd830n" path="res://Main/Editor/theme.tres" id="1_te7nb"]
 [ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
 [ext_resource type="Texture2D" uid="uid://b128u0b7lcv82" path="res://Main/Assets/icons/add.svg" id="3_c5412"]
+[ext_resource type="Texture2D" uid="uid://bk75py4iiri82" path="res://Main/Assets/icons/copy.svg" id="3_engvc"]
+[ext_resource type="Texture2D" uid="uid://dow7yms7xk7yh" path="res://Main/Assets/icons/paste.svg" id="4_6yqvf"]
 [ext_resource type="Texture2D" uid="uid://35hfnv7rcns1" path="res://Main/Editor/Objects/cube/icon.svg" id="4_suv3m"]
+[ext_resource type="Texture2D" uid="uid://cu75ovrgddboh" path="res://Main/Assets/icons/duplicate.svg" id="5_f4ntp"]
+[ext_resource type="Texture2D" uid="uid://55pwwdhwicm0" path="res://Main/Assets/icons/delete.svg" id="6_b3hc2"]
 
 [sub_resource type="Theme" id="Theme_suv3m"]
 BoxContainer/constants/separation = 6
@@ -17,6 +21,23 @@ Button/styles/pressed = null
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccg01"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_engvc"]
+bg_color = Color(0.6, 0.6, 0.6, 0.19607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l88iq"]
+bg_color = Color(0.50980395, 0.6117647, 0.69803923, 0.47058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suv3m"]
+bg_color = Color(0.50980395, 0.6117647, 0.69803923, 0.39215687)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vng3l"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.3)
+corner_detail = 5
 
 [node name="Ui" type="Control" unique_id=944202775]
 layout_mode = 3
@@ -87,6 +108,70 @@ text = "Export
 layout_mode = 2
 size_flags_horizontal = 4
 
+[node name="Controls" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=470440972]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="copy" type="Button" parent="Main/Toolbar/Contents" unique_id=2123476309]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Copy"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "
+"
+icon = ExtResource("3_engvc")
+icon_alignment = 1
+expand_icon = true
+
+[node name="paste" type="Button" parent="Main/Toolbar/Contents" unique_id=1888858779]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Paste"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "
+"
+icon = ExtResource("4_6yqvf")
+icon_alignment = 1
+expand_icon = true
+
+[node name="duplicate" type="Button" parent="Main/Toolbar/Contents" unique_id=1065068461]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Duplicate"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "
+"
+icon = ExtResource("5_f4ntp")
+icon_alignment = 1
+expand_icon = true
+
+[node name="delete" type="Button" parent="Main/Toolbar/Contents" unique_id=1209912855]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Delete"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+text = "
+"
+icon = ExtResource("6_b3hc2")
+icon_alignment = 1
+expand_icon = true
+
 [node name="Object" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=1194232515]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -96,7 +181,7 @@ custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-tooltip_text = "Shows the "
+tooltip_text = "New object"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
@@ -111,20 +196,7 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("1_te7nb")
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
-text = "
-"
-icon = ExtResource("4_suv3m")
-icon_alignment = 1
-expand_icon = true
-
-[node name="group" type="Button" parent="Main/Toolbar/Contents" unique_id=1508916303]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+tooltip_text = "Cube"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
@@ -140,17 +212,18 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 60.0
-offset_bottom = -188.0
+offset_right = -864.0
+offset_bottom = -210.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.25, 1)
 theme = ExtResource("1_te7nb")
 
 [node name="Title" type="Label" parent="Main/Objects" unique_id=1066141354]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 30.0
-scale = Vector2(4, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_te7nb")
 text = "Scene"
@@ -162,12 +235,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 50.0
 offset_top = 30.0
-offset_right = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 1)
 pivot_offset = Vector2(10, 0)
 theme = ExtResource("1_te7nb")
 allow_search = false
@@ -179,22 +249,41 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 460.0
+offset_top = 438.0
+offset_right = -864.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.25, 1)
 theme = ExtResource("1_te7nb")
 
 [node name="Title" type="Label" parent="Main/Properties" unique_id=692583819]
 layout_mode = 0
-offset_right = 1152.0
+offset_right = 288.0
 offset_bottom = 30.0
-scale = Vector2(4, 1)
 pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_te7nb")
 text = "Properties"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Tree" type="Tree" parent="Main/Properties" unique_id=230476311]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(10, 0)
+theme = ExtResource("1_te7nb")
+theme_override_constants/v_separation = 0
+theme_override_styles/hovered = SubResource("StyleBoxFlat_engvc")
+theme_override_styles/hovered_selected = SubResource("StyleBoxFlat_l88iq")
+theme_override_styles/selected = SubResource("StyleBoxFlat_suv3m")
+theme_override_styles/selected_focus = SubResource("StyleBoxFlat_vng3l")
+columns = 2
+allow_search = false
+enable_drag_unfolding = false
+hide_root = true
 
 [node name="Viewport" type="SubViewportContainer" parent="Main" unique_id=2011329771]
 layout_mode = 1
@@ -207,6 +296,7 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 2
 stretch = true
 
 [node name="Viewport" type="SubViewport" parent="Main/Viewport" unique_id=753948555]

@@ -5,12 +5,14 @@ var objindex = [
 	editor_3D,
 	editor_Cube
 ]
+
 var objects = {}
 var selected = 0
 
 signal created
 signal propchanged
 signal reselect
+signal deleted
 
 #######################################
 func parent(obj : editor_Main, p : editor_Main):
@@ -19,12 +21,12 @@ func parent(obj : editor_Main, p : editor_Main):
 
 func create(obj : editor_Main, p : editor_Main=null):
 	var uid = randi_range(0,99999999)
-	var model : Node3D = obj.model
 	obj.id=uid
 	obj.description=null
 	objects[uid]=obj
 	
-	if obj.model:
+	if obj.modelasset:
+		obj.model=obj.modelasset.instantiate()
 		obj.model.name=str(uid)
 		get_tree().get_root().add_child.call_deferred(obj.model)
 	if p:
@@ -47,7 +49,7 @@ func setProperty(obj : editor_Main, key, value):
 		prop.handler.call(value,obj.model)
 	propchanged.emit(obj,key,value)
 
-func select(id):
+func select(id = null):
 	if selected != 0 and objects[selected].model:
 		objects[selected].model.get_node("Main").material_overlay.set_shader_parameter("highlight", false)
 	if id:
@@ -57,18 +59,49 @@ func select(id):
 	else:
 		selected = 0
 	reselect.emit(id)
+	
+func copy(objid):
+	var obj : editor_Main = objects[objid].clone()
+	var uid = randi_range(0,99999999)
+	var p = objects[objid].props.parent.value
+	obj.id=uid
+	obj.description=null
+	objects[uid]=obj
+	
+	if obj.modelasset:
+		obj.model=obj.modelasset.instantiate()
+		obj.model.name=str(uid)
+		get_tree().get_root().add_child.call_deferred(obj.model)
+	if p:
+		setProperty(obj,"parent",p)
+	for i in obj.props:
+		var v = obj.props[i]
+		if v.has("handler"):
+			v.handler.call(v.value, obj.model)
+	if p:
+		setProperty(obj,"parent",p)
+	created.emit(obj,p)
+	
+	return uid
+
+func delete(objid):
+	if objects[objid]:
+		if !objects[objid].deletable:
+			return false
+		if selected == objid:
+			select()
+		if objects[objid].model:
+			objects[objid].model.queue_free()
+		deleted.emit(objects[objid],objid)
+		objects[objid]=null
+	
 #######################################
 
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
-	var scene = objects[create(editor_3D.new())]
-	setProperty(scene,"name","Scene")
 	
-	var scenefloor = objects[create(editor_Cube.new(),scene)]
+	var scenefloor = objects[create(editor_Cube.new())]
 	setProperty(scenefloor,"size",Vector3(100,1,100))
 	setProperty(scenefloor,"color",Color.SLATE_GRAY)
 	setProperty(scenefloor,"name","Floor")
-	
-	var cube = objects[create(editor_Cube.new(),scene)]
-	setProperty(cube,"position",Vector3(0,5.5,0))
 	

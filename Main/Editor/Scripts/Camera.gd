@@ -5,7 +5,7 @@ var camera_pitch = 0
 var mousepos = null
 
 func _process(_delta: float) -> void:
-	if !current:
+	if !current or !get_meta("inputEnabled"):
 		return
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (Vector3(input_dir.x, 0, input_dir.y)).normalized()

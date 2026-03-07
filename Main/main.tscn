@@ -31,3 +31,4 @@ environment = SubResource("Environment_qvhan")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.49222136, 86.35431, 0.29448056)
 current = true
 script = ExtResource("1_yh5la")
+metadata/inputEnabled = true

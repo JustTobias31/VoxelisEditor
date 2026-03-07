@@ -5,7 +5,6 @@ func _init():
 	props["position"] = {
 		"locked"= false,
 		"value"= Vector3(0, 0, 0),
-		"type"= "vec3",
 		"handler"= func(val: Vector3, obj: Node3D):
 			if obj:
 				obj.position = val
@@ -13,15 +12,13 @@ func _init():
 	props["size"] = {
 		"locked"= false,
 		"value"= Vector3(10, 10, 10),
-		"type"= "vec3",
 		"handler"= func(val: Vector3, obj: Node3D):
 			if obj:
 				obj.scale = val
 	}
 	props["visible"] = {
-		"locked"= false,
+		"locked"= true,
 		"value"= true,
-		"type"= "bool",
 		"handler"= func(val: bool, obj: Node3D):
 			if obj:
 				obj.visible = val
