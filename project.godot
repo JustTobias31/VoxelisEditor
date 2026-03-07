@@ -13,7 +13,10 @@ config_version=5
 config/name="VoxelisEditor"
 run/main_scene="uid://co88ub54mji2w"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="uid://dx1kj83j1sut6"
+config/icon="uid://5lrv4kugxklg"
+config/windows_native_icon="uid://btsipldox4ho0"
+boot_splash/minimum_display_time=5000
 
 [autoload]
 
