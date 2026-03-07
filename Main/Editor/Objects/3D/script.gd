@@ -16,6 +16,13 @@ func _init():
 			if obj:
 				obj.scale = val
 	}
+	props["rotation"] = {
+		"locked"= false,
+		"value"= Vector3(0, 0, 0),
+		"handler"= func(val: Vector3, obj: Node3D):
+			if obj:
+				obj.rotation_degrees=val
+	}
 	props["visible"] = {
 		"locked"= true,
 		"value"= true,

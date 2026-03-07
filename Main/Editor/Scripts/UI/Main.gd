@@ -285,5 +285,8 @@ func _ready() -> void:
 						return
 					Objects.setProperty(obj,prop,Color.from_string(new,Color.WHITE))
 					edited.set_custom_bg_color(1,obj.props[prop].value,true)
+				TYPE_STRING:
+					var new = edited.get_text(1)
+					Objects.setProperty(obj,prop,new)
 	)
 	
