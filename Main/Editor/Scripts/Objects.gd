@@ -105,10 +105,3 @@ func _ready() -> void:
 	setProperty(scenefloor,"color",Color.SLATE_GRAY)
 	setProperty(scenefloor,"name","Floor")
 	
-	var pivot = objects[create(editor_Cube.new())]
-	setProperty(pivot,"size",Vector3(0.1,0.1,0.1))
-	setProperty(pivot,"name","Floor")
-	
-	var part = objects[create(editor_Cube.new(),pivot)]
-	setProperty(part,"position",Vector3(0,10,0))
-	

@@ -20,6 +20,7 @@ var children = []
 var deletable = false
 var id = 0
 var modelasset = null
+var icon = load("res://Main/Editor/Objects/main/icon.svg")
 
 func clone():
 	var c = editor_Main.new()

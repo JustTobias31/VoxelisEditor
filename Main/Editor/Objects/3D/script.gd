@@ -37,4 +37,6 @@ func _init():
 	props.name.value="3D"
 	props.classname.value="3D"
 	
+	icon = load("res://Main/Editor/Objects/3D/icon.svg")
+	
 	description = "Any object that can get rendered in the 3D space"

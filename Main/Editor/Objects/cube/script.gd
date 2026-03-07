@@ -14,6 +14,8 @@ func _init():
 	props.name.value="Cube"
 	props.classname.value="Cube"
 	
+	icon = load("res://Main/Editor/Objects/cube/icon.svg")
+	
 	deletable = true
 	description = "Cube"
 	modelasset=load("res://Main/Editor/Objects/cube/model.tscn")
