@@ -28,4 +28,5 @@ func clone():
 	c.deletable = deletable
 	c.description = description
 	c.modelasset = modelasset
+	c.icon = icon
 	return c
