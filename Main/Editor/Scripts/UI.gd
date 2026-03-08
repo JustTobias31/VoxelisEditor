@@ -165,11 +165,11 @@ func toolbar():
 	var cam : Camera3D = $Viewport/Viewport/Scene/Camera3D
 	###
 	$Toolbar/Contents/Export.button_down.connect(func():
-		cam.set_meta("inputEnabled",false)
-		cam.projection=Camera3D.PROJECTION_ORTHOGONAL
-		cam.size=100
-		cam.rotation_degrees=Vector3(-90,0,0)
-		cam.position=Vector3(0,100,0)
+		#cam.set_meta("inputEnabled",false)
+		#cam.projection=Camera3D.PROJECTION_ORTHOGONAL
+		#cam.size=100
+		#cam.rotation_degrees=Vector3(-90,0,0)
+		#cam.position=Vector3(0,100,0)
 		var slicer = MeshSlicer.new()
 		cam.add_child(slicer)
 		for i in range(1,1000):
