@@ -26,6 +26,7 @@ Objects="*uid://dhquder0smgor"
 [display]
 
 window/size/mode=2
+window/size/initial_position_type=4
 window/stretch/mode="canvas_items"
 
 [input]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://co88ub54mji2w"]
 
-[ext_resource type="Script" uid="uid://dcc8hadickpaw" path="res://Main/Editor/Scripts/UI/Main.gd" id="1_suv3m"]
+[ext_resource type="Script" uid="uid://dcc8hadickpaw" path="res://Main/Editor/Scripts/UI.gd" id="1_suv3m"]
 [ext_resource type="Theme" uid="uid://dt51r7jbd830n" path="res://Main/Editor/theme.tres" id="1_te7nb"]
 [ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
 [ext_resource type="Texture2D" uid="uid://b128u0b7lcv82" path="res://Main/Assets/icons/add.svg" id="3_c5412"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://35hfnv7rcns1" path="res://Main/Editor/Objects/cube/icon.svg" id="4_suv3m"]
 [ext_resource type="Texture2D" uid="uid://cu75ovrgddboh" path="res://Main/Assets/icons/duplicate.svg" id="5_f4ntp"]
 [ext_resource type="Texture2D" uid="uid://55pwwdhwicm0" path="res://Main/Assets/icons/delete.svg" id="6_b3hc2"]
+[ext_resource type="Script" uid="uid://bi2f13frf1rc7" path="res://Main/Editor/Scripts/Exporter.gd" id="10_6yqvf"]
 
 [sub_resource type="Theme" id="Theme_suv3m"]
 BoxContainer/constants/separation = 6
@@ -37,6 +38,98 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(1, 1, 1, 0.3)
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4ntp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atu13"]
+bg_color = Color(0.19, 0.19, 0.19, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yqvf"]
+bg_color = Color(0.5377862, 1, 0.50600433, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sn4sq"]
+content_margin_top = 15.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 1
+expand_margin_right = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3hc2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.2159017, 0.21590173, 0.2159017, 0.6)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2gyp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.50980395, 0.6117647, 0.69803923, 0.47058824)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phiig"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.22, 0.22, 0.22, 0.7137255)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck1bf"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1882353, 0.21176471, 0.29411766, 0.6)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kg6cy"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1408, 0.15796, 0.22, 0.7137255)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 corner_detail = 5
 
 [node name="Ui" type="Control" unique_id=944202775]
@@ -309,3 +402,525 @@ render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="Scene" parent="Main/Viewport/Viewport" unique_id=2092636286 instance=ExtResource("2_30t0y")]
+
+[node name="Export" type="Panel" parent="." unique_id=675442323]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = 108.0
+offset_right = -192.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_f4ntp")
+script = ExtResource("10_6yqvf")
+
+[node name="Title" type="Label" parent="Export" unique_id=1697268983]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 45.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 24
+text = "Export scene"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Section" type="ProgressBar" parent="Export" unique_id=1809375500]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 125.0
+offset_top = -164.0
+offset_right = -143.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_te7nb")
+show_percentage = false
+
+[node name="Rendering" type="Panel" parent="Export/Section" unique_id=1712260886]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_atu13")
+
+[node name="Label" type="Label" parent="Export/Section/Rendering" unique_id=1653945257]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = 12.5
+offset_right = 25.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+text = "Rendering"
+horizontal_alignment = 1
+
+[node name="Finalizing" type="Panel" parent="Export/Section" unique_id=1563453577]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 113.75
+offset_top = -7.5
+offset_right = 128.75
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_atu13")
+
+[node name="Label2" type="Label" parent="Export/Section/Finalizing" unique_id=2085929899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_top = 20.0
+offset_right = 17.5
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+text = "Finalizing"
+horizontal_alignment = 1
+
+[node name="Layering" type="Panel" parent="Export/Section" unique_id=1653112242]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.75
+offset_top = -7.5
+offset_right = -113.75
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_atu13")
+
+[node name="Label3" type="Label" parent="Export/Section/Layering" unique_id=556271589]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = 12.5
+offset_right = 21.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+text = "Layering"
+horizontal_alignment = 1
+
+[node name="Config" type="Panel" parent="Export/Section" unique_id=641050985]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -7.5
+offset_right = -235.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_6yqvf")
+
+[node name="Label4" type="Label" parent="Export/Section/Config" unique_id=1301837035]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = 12.5
+offset_right = 33.5
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+text = "Configuration"
+horizontal_alignment = 1
+
+[node name="Finish" type="Panel" parent="Export/Section" unique_id=1035294887]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -7.5
+offset_right = 250.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_atu13")
+
+[node name="Label5" type="Label" parent="Export/Section/Finish" unique_id=1034002311]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = 12.5
+offset_right = 26.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+text = "Complete"
+horizontal_alignment = 1
+
+[node name="Settings" type="VBoxContainer" parent="Export" unique_id=568536030]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 100.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Directory" type="Label" parent="Export/Settings" unique_id=794531160]
+layout_mode = 2
+text = "Save location"
+
+[node name="Value" type="LineEdit" parent="Export/Settings/Directory" unique_id=1673417901]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 468.5
+offset_top = -32.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_sn4sq")
+placeholder_text = "/Exports/project"
+alignment = 1
+selecting_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+
+[node name="Directory" type="Button" parent="Export/Settings/Directory" unique_id=425124049]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -16.5
+offset_bottom = 8.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_te7nb")
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+icon = ExtResource("5_f4ntp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="HSeparator" type="HSeparator" parent="Export/Settings" unique_id=1390310561]
+layout_mode = 2
+
+[node name="Height" type="Label" parent="Export/Settings" unique_id=1995223979]
+layout_mode = 2
+text = "Scene height (Y)"
+
+[node name="Value" type="LineEdit" parent="Export/Settings/Height" unique_id=1578756723]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 588.5
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "100"
+alignment = 1
+max_length = 3
+selecting_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+
+[node name="Layers" type="Label" parent="Export/Settings" unique_id=1822472896]
+layout_mode = 2
+text = "Total layers"
+
+[node name="Value" type="LineEdit" parent="Export/Settings/Layers" unique_id=76578002]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 588.5
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "20"
+alignment = 1
+max_length = 2
+selecting_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+
+[node name="HSeparator2" type="HSeparator" parent="Export/Settings" unique_id=919578300]
+layout_mode = 2
+
+[node name="SizeX" type="Label" parent="Export/Settings" unique_id=1393998995]
+layout_mode = 2
+text = "Image size X"
+
+[node name="Value" type="LineEdit" parent="Export/Settings/SizeX" unique_id=948604674]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 588.5
+offset_top = -23.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "1048"
+alignment = 1
+max_length = 4
+caret_blink = true
+
+[node name="SizeY" type="Label" parent="Export/Settings" unique_id=1797915256]
+layout_mode = 2
+text = "Image size Y"
+
+[node name="Value" type="LineEdit" parent="Export/Settings/SizeY" unique_id=38562565]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 588.5
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "1048"
+alignment = 1
+max_length = 4
+selecting_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+
+[node name="HSeparator3" type="HSeparator" parent="Export/Settings" unique_id=1116385018]
+layout_mode = 2
+
+[node name="Offset" type="Label" parent="Export/Settings" unique_id=1324586721]
+self_modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 2
+text = "Offset per layer"
+
+[node name="Value" type="Label" parent="Export/Settings/Offset" unique_id=740243869]
+self_modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="Size" type="Label" parent="Export/Settings" unique_id=973916584]
+self_modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 2
+text = "Image size"
+
+[node name="Value" type="Label" parent="Export/Settings/Size" unique_id=1734419858]
+self_modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0KB"
+horizontal_alignment = 2
+
+[node name="HSeparator4" type="HSeparator" parent="Export/Settings" unique_id=447586201]
+layout_mode = 2
+
+[node name="Note" type="Label" parent="Export/Settings" unique_id=31846516]
+self_modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Note: Anything thats outside of 100 x 100 will not be rendered"
+horizontal_alignment = 1
+
+[node name="Controls" type="HBoxContainer" parent="Export/Settings" unique_id=735367619]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+alignment = 1
+
+[node name="Close" type="Button" parent="Export/Settings/Controls" unique_id=880246635]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b3hc2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2gyp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_phiig")
+text = "Close"
+
+[node name="Revert" type="Button" parent="Export/Settings/Controls" unique_id=2058340506]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b3hc2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2gyp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_phiig")
+text = " Revert to default "
+
+[node name="Render" type="Button" parent="Export/Settings/Controls" unique_id=508582195]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ck1bf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2gyp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kg6cy")
+text = "Render"
+
+[node name="Close" type="Button" parent="Export" unique_id=1226603225]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 350.0
+offset_right = 484.0
+offset_bottom = 400.0
+theme = ExtResource("1_te7nb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b3hc2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2gyp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_phiig")
+text = "Cancel"
+
+[node name="Bar" type="ProgressBar" parent="Export" unique_id=635541071]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = -2.5
+offset_right = 173.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_te7nb")
+value = 50.0
+show_percentage = false
+
+[node name="Stats" type="Label" parent="Export/Bar" unique_id=910434134]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.5
+offset_top = 15.0
+offset_right = 113.5
+offset_bottom = 53.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 16
+text = "0/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Label" parent="Export/Bar" unique_id=357337062]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -113.5
+offset_top = -55.0
+offset_right = 113.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 24
+text = "Generating layers..."
+horizontal_alignment = 1
+vertical_alignment = 1

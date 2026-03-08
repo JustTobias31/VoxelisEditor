@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 	translate(direction * speed)
 
 func _input(event):
-	if !current:
+	if !current or !get_meta("inputEnabled"):
 		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotation.y -= event.relative.x * sensitivity
@@ -43,7 +43,7 @@ func _input(event):
 			var result = space_state.intersect_ray(query)
 			
 			if result.has("collider"):
-				Objects.select(int(result.collider.get_parent().get_parent().name))
+				Objects.select(int(result.collider.get_parent().name))
 			else:
 				Objects.select(null)
 		speed = clamp(speed, 0.005, 2)

@@ -1,11 +1,5 @@
 extends Node
 
-var objindex = [
-	editor_Main,
-	editor_3D,
-	editor_Cube
-]
-
 var objects = {}
 var selected = 0
 
@@ -28,7 +22,7 @@ func create(obj : editor_Main, p : editor_Main=null):
 	if obj.modelasset:
 		obj.model=obj.modelasset.instantiate()
 		obj.model.name=str(uid)
-		get_tree().get_root().add_child.call_deferred(obj.model)
+		get_tree().get_root().get_node("/root/Ui/Main/Viewport/Viewport/Scene").add_child.call_deferred(obj.model)
 	if p:
 		setProperty(obj,"parent",p)
 	for i in obj.props:
@@ -37,6 +31,7 @@ func create(obj : editor_Main, p : editor_Main=null):
 			v.handler.call(v.value, obj.model)
 	
 	created.emit(obj,p)
+	print(get_tree().get_root().get_children())
 	
 	return uid
 	
@@ -51,11 +46,11 @@ func setProperty(obj : editor_Main, key, value):
 
 func select(id = null):
 	if selected != 0 and objects[selected].model:
-		objects[selected].model.get_node("Main").material_overlay.set_shader_parameter("highlight", false)
+		objects[selected].model.material_overlay.set_shader_parameter("highlight", false)
 	if id:
 		selected = id
 		if objects[selected].model:
-			objects[selected].model.get_node("Main").material_overlay.set_shader_parameter("highlight", true)
+			objects[selected].model.material_overlay.set_shader_parameter("highlight", true)
 	else:
 		selected = 0
 	reselect.emit(id)
@@ -70,8 +65,7 @@ func copy(objid):
 	
 	if obj.modelasset:
 		obj.model=obj.modelasset.instantiate()
-		obj.model.name=str(uid)
-		get_tree().get_root().add_child.call_deferred(obj.model)
+		get_tree().get_root().get_node("/root/Ui/Main/Viewport/Viewport/Scene").add_child.call_deferred(obj.model)
 	if p:
 		setProperty(obj,"parent",p)
 	for i in obj.props:
@@ -93,7 +87,7 @@ func delete(objid):
 		if objects[objid].model:
 			objects[objid].model.queue_free()
 		deleted.emit(objects[objid],objid)
-		objects[objid]=null
+		objects.erase(objid)
 	
 #######################################
 

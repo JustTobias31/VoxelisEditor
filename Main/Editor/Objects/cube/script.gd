@@ -7,7 +7,7 @@ func _init():
 		"locked"= false,
 		"value"= Color.GRAY,
 		"handler"= func(val: Color, obj: Node3D):
-			obj.get_node("Main").material_override.albedo_color=val
+			obj.material_override.albedo_color=val
 	}
 	
 	props.visible.locked=false

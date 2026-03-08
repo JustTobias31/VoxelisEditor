@@ -2,28 +2,25 @@
 
 [ext_resource type="Shader" uid="uid://imr5mjxdfv3g" path="res://Main/Editor/highlight.gdshader" id="1_ryrkj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ns03x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryrkj"]
 resource_local_to_scene = true
-albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6e2pi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ryrkj"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_ryrkj")
 shader_parameter/highlight = false
 
-[sub_resource type="BoxMesh" id="BoxMesh_kjgtg"]
+[sub_resource type="BoxMesh" id="BoxMesh_ryrkj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ryrkj"]
 
-[node name="Model" type="Node3D" unique_id=1810999721]
+[node name="Main" type="MeshInstance3D" unique_id=949320007]
+material_override = SubResource("StandardMaterial3D_ryrkj")
+material_overlay = SubResource("ShaderMaterial_ryrkj")
+mesh = SubResource("BoxMesh_ryrkj")
 
-[node name="Main" type="MeshInstance3D" parent="." unique_id=2147334240]
-material_override = SubResource("StandardMaterial3D_ns03x")
-material_overlay = SubResource("ShaderMaterial_6e2pi")
-mesh = SubResource("BoxMesh_kjgtg")
+[node name="Select" type="Area3D" parent="." unique_id=1472541709]
 
-[node name="Select" type="Area3D" parent="Main" unique_id=1472541709]
-
-[node name="Hitbox" type="CollisionShape3D" parent="Main/Select" unique_id=725168980]
+[node name="Hitbox" type="CollisionShape3D" parent="Select" unique_id=725168980]
 shape = SubResource("BoxShape3D_ryrkj")
