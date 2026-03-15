@@ -45,11 +45,11 @@ func setProperty(obj : editor_Main, key, value):
 	propchanged.emit(obj,key,value)
 
 func select(id = null):
-	if selected != 0 and objects[selected].model:
+	if objects.has(selected) and objects[selected].model:
 		objects[selected].model.material_overlay.set_shader_parameter("highlight", false)
 	if id:
 		selected = id
-		if objects[selected].model:
+		if objects.has(selected) and objects[selected].model:
 			objects[selected].model.material_overlay.set_shader_parameter("highlight", true)
 	else:
 		selected = 0
@@ -65,6 +65,7 @@ func copy(objid):
 	
 	if obj.modelasset:
 		obj.model=obj.modelasset.instantiate()
+		obj.model.name=str(uid)
 		get_tree().get_root().get_node("/root/Ui/Main/Viewport/Viewport/Scene").add_child.call_deferred(obj.model)
 	if p:
 		setProperty(obj,"parent",p)
@@ -95,7 +96,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	
 	var scenefloor = objects[create(editor_Cube.new())]
-	setProperty(scenefloor,"size",Vector3(100,1,100))
+	setProperty(scenefloor,"size",Vector3(400,0.1,400))
 	setProperty(scenefloor,"color",Color.SLATE_GRAY)
 	setProperty(scenefloor,"name","Floor")
 	

@@ -23,6 +23,31 @@ Button/styles/pressed = null
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccg01"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnwvl"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0.59607846)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yqvf"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0.42745098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdlcx"]
+bg_color = Color(0.6, 0.6, 0.6, 0.42745098)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_engvc"]
 bg_color = Color(0.6, 0.6, 0.6, 0.19607843)
 
@@ -53,14 +78,7 @@ corner_radius_bottom_left = 10
 corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atu13"]
-bg_color = Color(0.19, 0.19, 0.19, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yqvf"]
-bg_color = Color(0.5377862, 1, 0.50600433, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
@@ -178,6 +196,9 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "File"
 
 [node name="Edit" type="Button" parent="Main/Toolbar/Contents" unique_id=8310985]
@@ -185,6 +206,9 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "Edit
 "
 
@@ -193,6 +217,9 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "Export
 
 "
@@ -214,6 +241,9 @@ tooltip_text = "Copy"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "
 "
 icon = ExtResource("3_engvc")
@@ -229,6 +259,9 @@ tooltip_text = "Paste"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "
 "
 icon = ExtResource("4_6yqvf")
@@ -244,6 +277,9 @@ tooltip_text = "Duplicate"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "
 "
 icon = ExtResource("5_f4ntp")
@@ -259,6 +295,9 @@ tooltip_text = "Delete"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "
 "
 icon = ExtResource("6_b3hc2")
@@ -278,6 +317,9 @@ tooltip_text = "New object"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "
 "
 icon = ExtResource("3_c5412")
@@ -293,6 +335,9 @@ tooltip_text = "Cube"
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "
 "
 icon = ExtResource("4_suv3m")
@@ -313,11 +358,8 @@ theme = ExtResource("1_te7nb")
 
 [node name="Title" type="Label" parent="Main/Objects" unique_id=1066141354]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
+offset_right = 288.0
 offset_bottom = 26.0
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_te7nb")
 text = "Scene"
 horizontal_alignment = 1
@@ -394,10 +436,11 @@ stretch = true
 
 [node name="Viewport" type="SubViewport" parent="Main/Viewport" unique_id=753948555]
 handle_input_locally = false
+msaa_2d = 2
+msaa_3d = 2
+use_occlusion_culling = true
 oversampling = false
 size = Vector2i(865, 591)
-size_2d_override = Vector2i(1024, 1024)
-size_2d_override_stretch = true
 render_target_clear_mode = 2
 render_target_update_mode = 4
 
@@ -435,18 +478,20 @@ vertical_alignment = 1
 
 [node name="Section" type="ProgressBar" parent="Export" unique_id=1809375500]
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 125.0
+offset_left = -250.0
 offset_top = -164.0
-offset_right = -143.0
+offset_right = 250.0
 offset_bottom = -159.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_te7nb")
+max_value = 4.0
 show_percentage = false
 
 [node name="Rendering" type="Panel" parent="Export/Section" unique_id=1712260886]
@@ -563,7 +608,7 @@ offset_bottom = 7.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_styles/panel = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_atu13")
 
 [node name="Label4" type="Label" parent="Export/Section/Config" unique_id=1301837035]
 layout_mode = 1
@@ -619,7 +664,6 @@ text = "Complete"
 horizontal_alignment = 1
 
 [node name="Settings" type="VBoxContainer" parent="Export" unique_id=568536030]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -642,7 +686,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 468.5
+offset_left = 369.0
 offset_top = -32.0
 offset_right = -20.0
 grow_horizontal = 2
@@ -651,8 +695,11 @@ pivot_offset_ratio = Vector2(1, 0)
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_sn4sq")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_sn4sq")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sn4sq")
 placeholder_text = "/Exports/project"
 alignment = 1
+editable = false
 selecting_enabled = false
 virtual_keyboard_show_on_focus = false
 caret_blink = true
@@ -702,7 +749,7 @@ theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
 placeholder_text = "100"
 alignment = 1
-max_length = 3
+max_length = 6
 selecting_enabled = false
 virtual_keyboard_show_on_focus = false
 caret_blink = true
@@ -726,7 +773,7 @@ theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
 placeholder_text = "20"
 alignment = 1
-max_length = 2
+max_length = 6
 selecting_enabled = false
 virtual_keyboard_show_on_focus = false
 caret_blink = true
@@ -754,7 +801,7 @@ theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
 placeholder_text = "1048"
 alignment = 1
-max_length = 4
+max_length = 6
 caret_blink = true
 
 [node name="SizeY" type="Label" parent="Export/Settings" unique_id=1797915256]
@@ -776,10 +823,28 @@ theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
 placeholder_text = "1048"
 alignment = 1
-max_length = 4
+max_length = 6
 selecting_enabled = false
 virtual_keyboard_show_on_focus = false
 caret_blink = true
+
+[node name="Ratio" type="Label" parent="Export/Settings" unique_id=729834808]
+self_modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Pixels : position"
+
+[node name="Ratio2" type="Label" parent="Export/Settings/Ratio" unique_id=591181342]
+self_modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "1048 : 400"
+horizontal_alignment = 2
 
 [node name="HSeparator3" type="HSeparator" parent="Export/Settings" unique_id=1116385018]
 layout_mode = 2
@@ -787,7 +852,7 @@ layout_mode = 2
 [node name="Offset" type="Label" parent="Export/Settings" unique_id=1324586721]
 self_modulate = Color(1, 1, 1, 0.627451)
 layout_mode = 2
-text = "Offset per layer"
+text = "Layer offset"
 
 [node name="Value" type="Label" parent="Export/Settings/Offset" unique_id=740243869]
 self_modulate = Color(1, 1, 1, 0.627451)
@@ -803,7 +868,7 @@ horizontal_alignment = 2
 [node name="Size" type="Label" parent="Export/Settings" unique_id=973916584]
 self_modulate = Color(1, 1, 1, 0.627451)
 layout_mode = 2
-text = "Image size"
+text = "Image resolution"
 
 [node name="Value" type="Label" parent="Export/Settings/Size" unique_id=1734419858]
 self_modulate = Color(1, 1, 1, 0.627451)
@@ -823,7 +888,7 @@ layout_mode = 2
 self_modulate = Color(1, 1, 1, 0.627451)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
-text = "Note: Anything thats outside of 100 x 100 will not be rendered"
+text = "Note: Anything thats outside of the image resolution will not be rendered"
 horizontal_alignment = 1
 
 [node name="Controls" type="HBoxContainer" parent="Export/Settings" unique_id=735367619]
@@ -859,11 +924,19 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_kg6cy")
 text = "Render"
 
 [node name="Close" type="Button" parent="Export" unique_id=1226603225]
-layout_mode = 0
-offset_left = 284.0
-offset_top = 350.0
-offset_right = 484.0
-offset_bottom = 400.0
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 134.0
+offset_right = 100.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_te7nb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b3hc2")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_h2gyp")
@@ -871,6 +944,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_phiig")
 text = "Cancel"
 
 [node name="Bar" type="ProgressBar" parent="Export" unique_id=635541071]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -885,7 +959,8 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_te7nb")
-value = 50.0
+max_value = 1.0
+value = 1.0
 show_percentage = false
 
 [node name="Stats" type="Label" parent="Export/Bar" unique_id=910434134]
@@ -924,3 +999,13 @@ theme_override_font_sizes/font_size = 24
 text = "Generating layers..."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Folder" type="FileDialog" parent="Export" unique_id=518221155]
+oversampling_override = 1.0
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(1067, 500)
+ok_button_text = "Select"
+dialog_hide_on_ok = true
+file_mode = 2
+access = 2

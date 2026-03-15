@@ -28,6 +28,7 @@ Objects="*uid://dhquder0smgor"
 window/size/mode=2
 window/size/initial_position_type=4
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [input]
 
@@ -85,6 +86,6 @@ editor_Duplicate={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=2

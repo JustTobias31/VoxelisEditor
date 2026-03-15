@@ -17,23 +17,35 @@ background_mode = 2
 sky = SubResource("Sky_2w1kt")
 tonemap_mode = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvhan"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0.63816917, 0.3695115, 0.3372549)
+stencil_flags = 2
+stencil_outline_thickness = 0.032
+
+[sub_resource type="BoxMesh" id="BoxMesh_k3v36"]
+
 [node name="Node3D" type="Node3D" unique_id=2092636286]
 
 [node name="Light" type="DirectionalLight3D" parent="." unique_id=1404371220]
 transform = Transform3D(-0.6998912, -0.4040823, -0.58895653, -0.51005125, -0.2944783, 0.8081647, -0.5, 0.8660254, 8.142146e-08, 0, 0, 0)
-light_energy = 0.5
 shadow_enabled = true
-shadow_blur = 10.0
-directional_shadow_blend_splits = true
-directional_shadow_fade_start = 1.0
-directional_shadow_max_distance = 1000.0
+directional_shadow_max_distance = 400.0
 
 [node name="Environment" type="WorldEnvironment" parent="." unique_id=727675055]
 environment = SubResource("Environment_qvhan")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=893656239]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 100, 0)
+[node name="Camera" type="Camera3D" parent="." unique_id=893656239]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 400, 0)
 current = true
 size = 100.0
 script = ExtResource("1_yh5la")
 metadata/inputEnabled = true
+
+[node name="ExportVisualize" type="MeshInstance3D" parent="." unique_id=1659870650]
+visible = false
+material_override = SubResource("StandardMaterial3D_qvhan")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_k3v36")

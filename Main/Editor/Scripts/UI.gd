@@ -15,6 +15,7 @@ func create_tree_item(_item, _parent_item):
 
 func NewObject(obj,parent):
 	var item
+	print(objlist)
 	if objlist.has(obj.id):
 		objlist[obj.id].free()
 	
@@ -139,7 +140,6 @@ func render_props(obj):
 	var objprops = obj.props
 	for i in objprops:
 		proplist[i]=create_prop_item(obj,i)
-		
 
 ######################
 var clipboard = null
@@ -162,30 +162,10 @@ var controls = {
 
 var slices = {}
 func toolbar():
-	var cam : Camera3D = $Viewport/Viewport/Scene/Camera3D
+	var exportui = $"../Export"
 	###
 	$Toolbar/Contents/Export.button_down.connect(func():
-		#cam.set_meta("inputEnabled",false)
-		#cam.projection=Camera3D.PROJECTION_ORTHOGONAL
-		#cam.size=100
-		#cam.rotation_degrees=Vector3(-90,0,0)
-		#cam.position=Vector3(0,100,0)
-		var slicer = MeshSlicer.new()
-		cam.add_child(slicer)
-		for i in range(1,1000):
-			slices[i]=[]
-			for o in Objects.objects:
-				var obj : MeshInstance3D = Objects.objects[o].model
-				if !obj: continue
-				obj.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
-				var result = slicer.slice_layer(obj.mesh, obj.global_transform, i/10.0, i/10.0+0.1)
-				
-				var sliced = MeshInstance3D.new()
-				sliced.mesh = result
-				sliced.material_override = obj.material_override
-				get_tree().get_root().add_child(sliced)
-				slices[i].append(sliced)
-				await get_tree().process_frame
+		exportui.visible=true
 	)
 	### Transform
 	### Controls
@@ -239,6 +219,7 @@ func _ready() -> void:
 	root2 = props.create_item()
 	Objects.reselect.connect(func(id):
 		if id:
+			print(id," selected")
 			render_props(Objects.objects[id])
 		else:
 			props.clear()

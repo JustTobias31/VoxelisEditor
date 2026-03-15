@@ -14,6 +14,7 @@ shader_parameter/highlight = false
 [sub_resource type="BoxMesh" id="BoxMesh_ryrkj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ryrkj"]
+margin = 0.01
 
 [node name="Main" type="MeshInstance3D" unique_id=949320007]
 material_override = SubResource("StandardMaterial3D_ryrkj")

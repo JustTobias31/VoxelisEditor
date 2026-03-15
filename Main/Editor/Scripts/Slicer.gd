@@ -32,14 +32,15 @@ func slice_layer(mesh: Mesh, mesh_global_transform: Transform3D, y_min: float, y
 	
 	var mesh_size = max_at - min_at
 	var big = max(mesh_size.x, mesh_size.z) * 2.0
+	var mesh_center = mesh_global_transform.origin
 	var slab_thickness = 1000.0
 	
 	# Slicers positioned in world space Y
-	bottom_csg.global_position = Vector3(0, y_min - slab_thickness / 2.0, 0)
+	bottom_csg.global_position = Vector3(mesh_center.x, y_min - slab_thickness / 2.0, mesh_center.z)
 	bottom_csg.mesh.size = Vector3(big, slab_thickness, big)
 	bottom_csg.operation = CSGShape3D.OPERATION_SUBTRACTION
 	
-	top_csg.global_position = Vector3(0, y_max + slab_thickness / 2.0, 0)
+	top_csg.global_position = Vector3(mesh_center.x, y_max + slab_thickness / 2.0, mesh_center.z)
 	top_csg.mesh.size = Vector3(big, slab_thickness, big)
 	top_csg.operation = CSGShape3D.OPERATION_SUBTRACTION
 	
