@@ -28,6 +28,7 @@ var state = 0
 func VisualizeSize():
 	visualizer.scale=Vector3(cfg.SizeX*0.38,cfg.Height,cfg.SizeY*0.38)
 	visualizer.position=Vector3(0,cfg.Height/2,0)
+	visualizer.get_parent().get_node("Light").directional_shadow_max_distance=cfg.Height+50
 
 func updateInfos(val,section,full):
 	val = float(val)
