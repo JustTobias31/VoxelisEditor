@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="VoxelisEditor"
-config/version="0.1.0.0"
+config/description="https://github.com/JustTobias31/VoxelisEditor"
+config/version="0.0.3.0"
 run/main_scene="uid://co88ub54mji2w"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-boot_splash/image="uid://dx1kj83j1sut6"
-config/icon="uid://5lrv4kugxklg"
-config/windows_native_icon="uid://btsipldox4ho0"
+boot_splash/bg_color=Color(0.068798296, 0.06879827, 0.068798244, 1)
+boot_splash/image="uid://cks0a5iwuwcg7"
+config/icon="uid://b3m46lxh1no8c"
 boot_splash/minimum_display_time=5000
 
 [autoload]
