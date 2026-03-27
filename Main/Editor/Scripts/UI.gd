@@ -15,7 +15,6 @@ func create_tree_item(_item, _parent_item):
 
 func NewObject(obj,parent):
 	var item
-	print(objlist)
 	if objlist.has(obj.id):
 		objlist[obj.id].free()
 	
@@ -54,7 +53,7 @@ func create_prop_item(obj:editor_Main,propname):
 			
 			x.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
 			x.set_editable(1,!prop.locked)
-			x.set_text(1,str(prop.value.x))
+			x.set_text(1,str(snapped(prop.value.x,0.001)))
 			
 			x.set_meta("dimension","x")
 			x.set_meta("obj",obj.id)
@@ -66,7 +65,7 @@ func create_prop_item(obj:editor_Main,propname):
 			
 			y.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
 			y.set_editable(1,!prop.locked)
-			y.set_text(1,str(prop.value.y))
+			y.set_text(1,str(snapped(prop.value.y,0.001)))
 			
 			y.set_meta("dimension","y")
 			y.set_meta("obj",obj.id)
@@ -78,7 +77,7 @@ func create_prop_item(obj:editor_Main,propname):
 			
 			z.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
 			z.set_editable(1,!prop.locked)
-			z.set_text(1,str(prop.value.z))
+			z.set_text(1,str(snapped(prop.value.z,0.001)))
 			
 			z.set_meta("dimension","z")
 			z.set_meta("prop",propname)
@@ -160,14 +159,19 @@ var controls = {
 		pass
 }
 
-var slices = {}
 func toolbar():
 	var exportui = $"../Export"
+	var camera = $Viewport/Viewport/Scene/Camera
 	###
+	$Toolbar/Contents/File.button_down.connect(func(): $wip.popup_centered())
+	$Toolbar/Contents/Edit.button_down.connect(func(): $wip.popup_centered())
 	$Toolbar/Contents/Export.button_down.connect(func():
 		exportui.visible=true
 	)
-	### Transform
+	### Gizmos
+	$Toolbar/Contents/move.button_down.connect(func(): camera.gizmoType = 1)
+	$Toolbar/Contents/scale.button_down.connect(func(): camera.gizmoType = 2)
+	$Toolbar/Contents/rotate.button_down.connect(func(): $wip.popup_centered())
 	### Controls
 	$Toolbar/Contents/copy.button_down.connect(controls.copy)
 	$Toolbar/Contents/paste.button_down.connect(controls.paste)
@@ -178,6 +182,7 @@ func toolbar():
 	$Toolbar/Contents/cube.button_down.connect(func():
 		Objects.create(editor_Cube.new())
 	)
+	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("editor_Copy",false,true):
 		controls.copy.call()
@@ -219,7 +224,6 @@ func _ready() -> void:
 	root2 = props.create_item()
 	Objects.reselect.connect(func(id):
 		if id:
-			print(id," selected")
 			render_props(Objects.objects[id])
 		else:
 			props.clear()

@@ -31,18 +31,20 @@ func create(obj : editor_Main, p : editor_Main=null):
 			v.handler.call(v.value, obj.model)
 	
 	created.emit(obj,p)
-	print(get_tree().get_root().get_children())
+	print("create ",uid)
 	
 	return uid
 	
 func setProperty(obj : editor_Main, key, value):
 	var prop = obj.props[key]
 	prop.value=value
+	
 	if key == "parent":
 		objects[value.id].children.append(obj.id)
 	if prop.has("handler"):
 		prop.handler.call(value,obj.model)
 	propchanged.emit(obj,key,value)
+	print("prop edit ",obj.id, "; ", key)
 
 func select(id = null):
 	if objects.has(selected) and objects[selected].model:
@@ -54,6 +56,7 @@ func select(id = null):
 	else:
 		selected = 0
 	reselect.emit(id)
+	print("select ",selected)
 	
 func copy(objid):
 	var obj : editor_Main = objects[objid].clone()
@@ -76,6 +79,7 @@ func copy(objid):
 	if p:
 		setProperty(obj,"parent",p)
 	created.emit(obj,p)
+	print("cloned ",objid, "; ", uid)
 	
 	return uid
 
@@ -89,6 +93,7 @@ func delete(objid):
 			objects[objid].model.queue_free()
 		deleted.emit(objects[objid],objid)
 		objects.erase(objid)
+		print("deleted ",objid)
 	
 #######################################
 

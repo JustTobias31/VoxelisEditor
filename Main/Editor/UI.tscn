@@ -23,20 +23,6 @@ Button/styles/hover = null
 Button/styles/normal = null
 Button/styles/pressed = null
 
-[sub_resource type="GDScript" id="GDScript_h2gyp"]
-script/source = "extends HBoxContainer
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccg01"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
@@ -207,7 +193,6 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme = SubResource("Theme_suv3m")
-script = SubResource("GDScript_h2gyp")
 
 [node name="File" type="Button" parent="Main/Toolbar/Contents" unique_id=452284215]
 custom_minimum_size = Vector2(60, 0)
@@ -519,6 +504,31 @@ render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="Scene" parent="Main/Viewport/Viewport" unique_id=2092636286 instance=ExtResource("2_30t0y")]
+
+[node name="wip" type="AcceptDialog" parent="Main" unique_id=1912784299]
+oversampling_override = 1.0
+title = "ts is unfinished"
+initial_position = 2
+size = Vector2i(534, 548)
+ok_button_text = "contribute? 🥺please?"
+dialog_text = "PLEASE USER I NEED THIS MY GITHUB IS KINDA CONTRIBUTORLESS
+⣿⠁⠀⠀⠀⠀⢀⣤⣿⣿⣿⣷⣿⣿⣾⣶⣧⣶⣶⣄⡀
+⣿⠅⢠⡖⠀⣄⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣀
+⡁⣠⣿⠃⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⣭⢲⡤
+⠃⠿⠿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⢣⡟⢣
+        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣍
+⠚⢰⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡊⠅⠀⠀
+⡛⠇⣻⣿⣯⣭⣍⡛⠛⠛⠛⠻⣿⣿⣿⡿⠟⠿⠿⠟⠿⣛⠛⠭⠓⠈⢠⡿⣿⠀
+⠁⠀⠀⣻⠟⠭⠛⠽⠛⠖⠆⢀⢠⣽⣿⣿⣄⠀⠀⠠⡔⡞⡴⢋⠆⡁⠂⠰⢉⡛⠄
+⠀⠀⢽⢣⡄⣄⣀⣀⣠⣤⣭⣿⣿⣿⣿⣿⣷⢦⣀⠀⠀⠀⠀⠀⡀⠄⠀⠀⠀⠀⠀⠀
+⠀⠀⢪⢗⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣚⣿⣿⣿⣶⣣⠒⡀⠂⠀⠀⠀⠀
+⠀⠀⠀⡛⢿⣿⣿⣿⣿⣿⡿⠿⢿⣿⣿⠿⠟⢷⣹⢿⣿⡿⢷⠉⠄⠀⠀⠀⠀⠀⠀⠀
+⣤⡤⣄⠑⡨⠐⢯⣿⣿⣯⡀⢀⠀⠀⠀⠀⠀⠠⣿⠧⡙⠘⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀
+⡝⠉⠀⠡⢣⣛⡼⢻⢿⣿⣿⣿⣿⣷⣶⣶⣆⣷⢻⠳⣄⢠⠀⠀⠀⠀
+⣺⠇⠀⠀⠀⠁⠞⡵⢣⠌⠛⠿⢛⠻⣙⠟⠛⠫⠛⠈⠡⢘⠂⠁⠀⠀⠀
+⣿⣿⣄⠀⠀⠀⠀⠈⢑⠊⠙⠾⢿⣷⣮⣴⣿⡗⠂⢀⠂⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣦⠀⠀⠀⠀⠀⠃⠄⠀⠂⠉⠙⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+"
 
 [node name="Export" type="Panel" parent="." unique_id=675442323]
 visible = false

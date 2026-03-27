@@ -7,13 +7,28 @@ var mousepos = null
 ############ Gizmo control
 @onready var gizmoModel = $"../Gizmo"
 var gizmoType = 1
-var gizmoSensitivity = 0.1
 
 var gizmoBegin = null
 var gizmoCoord = null
+var gizmoPos = null
+var gizmoSize = null
 
 var DragStartHit: Vector3
 var DragStartPosition: Vector3
+
+func Ray(exclude,mouse):
+	var space_state = get_world_3d().direct_space_state
+	var origin = project_ray_origin(mouse)
+	var end = origin + project_ray_normal(mouse) * 10000
+	
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.exclude = exclude
+	query.collide_with_areas = true
+	
+	var result = space_state.intersect_ray(query)
+	if result.has("collider"):
+		return result.collider
+	
 
 func UpdateGizmo():
 	match gizmoType:
@@ -39,22 +54,12 @@ func UpdateGizmo():
 		gizmoModel.get_node("Scale").visible=false
 		gizmoModel.get_node("Move").visible=false
 		gizmoModel.get_node("Rotate").visible=false
-
-func ApplyTransform(prop : String, coord : String, offset : float, model : editor_Main):
-	match coord:
-		"X":
-			Objects.setProperty(model,prop,model.props[prop]+Vector3(offset,0,0))
-		"Y":
-			Objects.setProperty(model,prop,model.props[prop]+Vector3(0,offset,0))
-		"Z":
-			Objects.setProperty(model,prop,model.props[prop]+Vector3(0,0,offset))
 	
 func TranslateGizmo(
 	axis: Vector3,
 	screen_pos: Vector2,
 	camera: Camera3D,
 	drag_start_hit: Vector3,
-	drag_start_position: Vector3
 ):
 	var to_camera = (camera.global_position - drag_start_hit).normalized()
 	var plane_normal = axis.cross(to_camera).cross(axis).normalized()
@@ -68,10 +73,10 @@ func TranslateGizmo(
 	var hit = plane.intersects_ray(ray_origin, ray_dir)
 	
 	if hit == null:
-		return
+		return Vector3(0,0,0)
 	
 	var motion = (hit - drag_start_hit).dot(axis)
-	return drag_start_position + axis * motion
+	return axis * motion
 
 func GetAxisVector(coord: String) -> Vector3:
 	match coord:
@@ -113,47 +118,64 @@ func _input(event):
 				mousepos = null
 				
 		#### Gizmo and select logic
-		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed: 
-			var mouse = event.position
-			
-			var space_state = get_world_3d().direct_space_state
-			var origin = project_ray_origin(mouse)
-			var end = origin + project_ray_normal(mouse) * 10000
-			
-			var query = PhysicsRayQueryParameters3D.create(origin, end)
-			query.collide_with_areas = true
-			var result = space_state.intersect_ray(query)
-			print("click")
-			
-			if result.has("collider"):
-				if result.collider.get_parent().get_parent().get_parent()==gizmoModel:
-					print("found gizmo")
-					gizmoBegin = mouse
-					gizmoCoord = result.collider.get_parent().name
-					
-					gizmoCoord = GetAxisVector(gizmoCoord.replace("-", ""))
-					
-					var selectedModel = Objects.objects[Objects.selected].model
-					DragStartPosition = selectedModel.global_position
-					
-					var toCam = (global_position - selectedModel.global_position).normalized()
-					var planeNormal = gizmoCoord.cross(toCam).cross(gizmoCoord).normalized()
-					var plane = Plane(planeNormal, selectedModel.global_position)
-					
-					DragStartHit = plane.intersects_ray(
-						project_ray_origin(mouse),
-						project_ray_normal(mouse)
-					)
-				else:
-					Objects.select(int(result.collider.get_parent().name))
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			var result
+			if Objects.selected == 0:
+				result = Ray([gizmoModel],event.position)
+				if result:
+					Objects.select(int(result.get_parent().name))
 					UpdateGizmo()
+				return
+				
+			var exclude = []
+			for obj in Objects.objects:
+				obj = Objects.objects[obj]
+				if obj.model:
+					exclude.append(obj.model.get_node("Ray").get_rid())
+			 
+			result = Ray(exclude,event.position) # Gizmos finder
+			exclude = null
+			
+			if !result:
+				result = Ray([gizmoModel],event.position) # Object finder
+				if !result:
+					Objects.select(null)
+					UpdateGizmo()
+					return
+				Objects.select(int(result.get_parent().name))
+				UpdateGizmo()
+			elif result.get_parent().get_parent().get_parent()==gizmoModel:
+				gizmoBegin = event.position
+				gizmoCoord = GetAxisVector(result.get_parent().name)
+				
+				var selected = Objects.objects[Objects.selected]
+				var selectedModel = selected.model
+				
+				DragStartPosition = selectedModel.global_position
+				
+				match gizmoType:
+					1:
+						gizmoPos = selected.props.position.value
+					2:
+						gizmoPos = selected.props.position.value
+						gizmoSize = selected.props.size.value
+				
+				var toCam = (global_position - selectedModel.global_position).normalized()
+				var planeNormal = gizmoCoord.cross(toCam).cross(gizmoCoord).normalized()
+				var plane = Plane(planeNormal, selectedModel.global_position)
+				
+				DragStartHit = plane.intersects_ray(
+					project_ray_origin(event.position),
+					project_ray_normal(event.position)
+				)
 			else:
 				Objects.select(null)
 				UpdateGizmo()
-		elif !event.pressed and gizmoCoord: ## Stop gizmo control
-			gizmoBegin = null
-			gizmoCoord = null
-			UpdateGizmo()
+		elif !event.pressed and gizmoCoord:
+			gizmoBegin=null
+			gizmoCoord=null
+			gizmoPos=null
+			gizmoSize=null
 			
 	elif event is InputEventMouseMotion and gizmoCoord: ## Apply gizmo transform
 		match gizmoType:
@@ -163,7 +185,16 @@ func _input(event):
 					event.position,
 					self,
 					DragStartHit,
-					DragStartPosition
 				)
-				Objects.setProperty(Objects.objects[Objects.selected], "position", out)
-		 
+				Objects.setProperty(Objects.objects[Objects.selected], "position", gizmoPos+out)
+			2:
+				var selobj:editor_Main = Objects.objects[Objects.selected]
+				var out = TranslateGizmo(
+					gizmoCoord,
+					event.position,
+					self,
+					DragStartHit,
+				)
+				Objects.setProperty(selobj, "size", gizmoSize+out)
+				if gizmoCoord == Vector3.UP:
+					Objects.setProperty(selobj, "position", gizmoPos+Vector3(0,out.y/2,0))

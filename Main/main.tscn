@@ -38,13 +38,17 @@ bottom_radius = 0.01
 height = 0.3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh5la"]
-size = Vector3(0.03, 0.4, 0.03)
+size = Vector3(0.03, 0.3392578, 0.03)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eunhr"]
+no_depth_test = true
 shading_mode = 0
 albedo_color = Color(1, 0.33333334, 0.33333334, 1)
+stencil_flags = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3v36"]
+render_priority = 10
+no_depth_test = true
 shading_mode = 0
 albedo_color = Color(0.41568628, 1, 0.4862745, 1)
 
@@ -109,16 +113,6 @@ mesh = SubResource("CylinderMesh_2w1kt")
 [node name="Detect" type="CollisionShape3D" parent="Gizmo/Handles/Z/Ray" unique_id=1507954119]
 shape = SubResource("BoxShape3D_yh5la")
 
-[node name="Z-" type="MeshInstance3D" parent="Gizmo/Handles" unique_id=1953585300]
-transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0, -0.14999998)
-material_override = SubResource("StandardMaterial3D_yh5la")
-mesh = SubResource("CylinderMesh_2w1kt")
-
-[node name="Ray" type="Area3D" parent="Gizmo/Handles/Z-" unique_id=1186340407]
-
-[node name="Detect" type="CollisionShape3D" parent="Gizmo/Handles/Z-/Ray" unique_id=1520725141]
-shape = SubResource("BoxShape3D_yh5la")
-
 [node name="X" type="MeshInstance3D" parent="Gizmo/Handles" unique_id=1063144165]
 transform = Transform3D(-4.371139e-08, 1, -1.3113416e-07, 0, 1.3113416e-07, 1, 1, 4.371139e-08, -5.7320566e-15, 0.15, 0, 0)
 material_override = SubResource("StandardMaterial3D_eunhr")
@@ -127,18 +121,7 @@ mesh = SubResource("CylinderMesh_2w1kt")
 [node name="Ray" type="Area3D" parent="Gizmo/Handles/X" unique_id=109151409]
 
 [node name="Detect" type="CollisionShape3D" parent="Gizmo/Handles/X/Ray" unique_id=920542371]
-transform = Transform3D(1, 0, 3.3881318e-21, 0, 1, -8.526513e-14, 0, 8.526513e-14, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_yh5la")
-
-[node name="X-" type="MeshInstance3D" parent="Gizmo/Handles" unique_id=1678484039]
-transform = Transform3D(4.371139e-08, -1, 2.1855695e-07, 3.821371e-15, -2.1855695e-07, -1, 1, 4.371139e-08, -5.7320566e-15, -0.15, 0, 0)
-material_override = SubResource("StandardMaterial3D_eunhr")
-mesh = SubResource("CylinderMesh_2w1kt")
-
-[node name="Ray" type="Area3D" parent="Gizmo/Handles/X-" unique_id=645274696]
-
-[node name="Detect" type="CollisionShape3D" parent="Gizmo/Handles/X-/Ray" unique_id=924851257]
-transform = Transform3D(1, 0, 2.342046e-19, 0, 1, -2.5054593e-22, -1.6940659e-21, -2.5055616e-22, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 3.3881318e-21, 0, 1, -8.526513e-14, 0, 8.526513e-14, 1, 0, 0.008984372, 0)
 shape = SubResource("BoxShape3D_yh5la")
 
 [node name="Y" type="MeshInstance3D" parent="Gizmo/Handles" unique_id=209640621]
@@ -149,44 +132,20 @@ mesh = SubResource("CylinderMesh_2w1kt")
 [node name="Ray" type="Area3D" parent="Gizmo/Handles/Y" unique_id=1762278791]
 
 [node name="Detect" type="CollisionShape3D" parent="Gizmo/Handles/Y/Ray" unique_id=1229932425]
-shape = SubResource("BoxShape3D_yh5la")
-
-[node name="Y-" type="MeshInstance3D" parent="Gizmo/Handles" unique_id=1682970417]
-transform = Transform3D(-5.732057e-15, 2.6226832e-07, 1, 4.371139e-08, -1, 2.6226832e-07, 1, 4.371139e-08, -5.7320566e-15, 3.2783543e-08, -0.14999998, 0)
-material_override = SubResource("StandardMaterial3D_k3v36")
-mesh = SubResource("CylinderMesh_2w1kt")
-
-[node name="Ray" type="Area3D" parent="Gizmo/Handles/Y-" unique_id=2040722707]
-
-[node name="Detect" type="CollisionShape3D" parent="Gizmo/Handles/Y-/Ray" unique_id=491725252]
+transform = Transform3D(1, 0, 0, 0, 1, -2.5055616e-22, 0, -2.5055616e-22, 1, 0, 0.021386728, -8.881784e-15)
 shape = SubResource("BoxShape3D_yh5la")
 
 [node name="Scale" type="Node3D" parent="Gizmo" unique_id=926185861]
 visible = false
-
-[node name="X-" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=680628432]
-transform = Transform3D(4.371139e-08, -1, 2.1855695e-07, 3.821371e-15, -2.1855695e-07, -1, 1, 4.371139e-08, -5.7320566e-15, -0.30343515, -5.9604645e-08, 0)
-material_override = SubResource("StandardMaterial3D_eunhr")
-mesh = SubResource("BoxMesh_liyct")
 
 [node name="Y" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=451801055]
 transform = Transform3D(1.9106855e-15, -1.7484555e-07, -1, -4.371139e-08, 1, -1.7484555e-07, 1, 4.371139e-08, -5.7320566e-15, -3.9790713e-08, 0.3034351, 0)
 material_override = SubResource("StandardMaterial3D_k3v36")
 mesh = SubResource("BoxMesh_liyct")
 
-[node name="Y-" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=1144025309]
-transform = Transform3D(-5.732057e-15, 2.6226832e-07, 1, 4.371139e-08, -1, 2.6226832e-07, 1, 4.371139e-08, -5.7320566e-15, 6.631785e-08, -0.30343515, 0)
-material_override = SubResource("StandardMaterial3D_k3v36")
-mesh = SubResource("BoxMesh_liyct")
-
 [node name="X" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=1870172031]
 transform = Transform3D(-4.371139e-08, 1, -1.3113416e-07, 0, 1.3113416e-07, 1, 1, 4.371139e-08, -5.7320566e-15, 0.30343515, 0, 0)
 material_override = SubResource("StandardMaterial3D_eunhr")
-mesh = SubResource("BoxMesh_liyct")
-
-[node name="Z-" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=1649865630]
-transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0, -0.30343515)
-material_override = SubResource("StandardMaterial3D_yh5la")
 mesh = SubResource("BoxMesh_liyct")
 
 [node name="Z" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=1560160040]
@@ -201,24 +160,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 material_override = SubResource("StandardMaterial3D_yh5la")
 mesh = SubResource("CylinderMesh_ib3t1")
 
-[node name="Z-" type="MeshInstance3D" parent="Gizmo/Move" unique_id=1125907494]
-transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, -5.9604645e-08, -0.3034351)
-material_override = SubResource("StandardMaterial3D_yh5la")
-mesh = SubResource("CylinderMesh_ib3t1")
-
 [node name="X" type="MeshInstance3D" parent="Gizmo/Move" unique_id=1526207032]
 transform = Transform3D(-4.371139e-08, 1, -1.3113416e-07, 0, 1.3113416e-07, 1, 1, 4.371139e-08, -5.7320566e-15, 0.30343515, 0, 0)
 material_override = SubResource("StandardMaterial3D_eunhr")
-mesh = SubResource("CylinderMesh_ib3t1")
-
-[node name="X-" type="MeshInstance3D" parent="Gizmo/Move" unique_id=464408802]
-transform = Transform3D(4.371139e-08, -1, 2.1855695e-07, 3.821371e-15, -2.1855695e-07, -1, 1, 4.371139e-08, -5.7320566e-15, -0.30343515, -5.9604645e-08, 0)
-material_override = SubResource("StandardMaterial3D_eunhr")
-mesh = SubResource("CylinderMesh_ib3t1")
-
-[node name="Y-" type="MeshInstance3D" parent="Gizmo/Move" unique_id=974951165]
-transform = Transform3D(-5.732057e-15, 2.6226832e-07, 1, 4.371139e-08, -1, 2.6226832e-07, 1, 4.371139e-08, -5.7320566e-15, 6.631785e-08, -0.30343515, 0)
-material_override = SubResource("StandardMaterial3D_k3v36")
 mesh = SubResource("CylinderMesh_ib3t1")
 
 [node name="Y" type="MeshInstance3D" parent="Gizmo/Move" unique_id=136340309]
