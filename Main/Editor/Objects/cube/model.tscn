@@ -21,7 +21,7 @@ material_override = SubResource("StandardMaterial3D_ryrkj")
 material_overlay = SubResource("ShaderMaterial_ryrkj")
 mesh = SubResource("BoxMesh_ryrkj")
 
-[node name="Select" type="Area3D" parent="." unique_id=1472541709]
+[node name="Ray" type="Area3D" parent="." unique_id=1472541709]
 
-[node name="Hitbox" type="CollisionShape3D" parent="Select" unique_id=725168980]
+[node name="Hitbox" type="CollisionShape3D" parent="Ray" unique_id=725168980]
 shape = SubResource("BoxShape3D_ryrkj")

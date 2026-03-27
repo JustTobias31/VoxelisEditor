@@ -5,8 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://dks5tqhcp416" path="res://Main/main.tscn" id="2_30t0y"]
 [ext_resource type="Texture2D" uid="uid://b128u0b7lcv82" path="res://Main/Assets/icons/add.svg" id="3_c5412"]
 [ext_resource type="Texture2D" uid="uid://bk75py4iiri82" path="res://Main/Assets/icons/copy.svg" id="3_engvc"]
+[ext_resource type="Texture2D" uid="uid://cq42d4kyaqoiv" path="res://Main/Assets/icons/Move.svg" id="3_h2gyp"]
 [ext_resource type="Texture2D" uid="uid://dow7yms7xk7yh" path="res://Main/Assets/icons/paste.svg" id="4_6yqvf"]
+[ext_resource type="Texture2D" uid="uid://bnt1jqps65k7u" path="res://Main/Assets/icons/Scale.svg" id="4_phiig"]
 [ext_resource type="Texture2D" uid="uid://35hfnv7rcns1" path="res://Main/Editor/Objects/cube/icon.svg" id="4_suv3m"]
+[ext_resource type="Texture2D" uid="uid://kxvkw8o5rutu" path="res://Main/Assets/icons/Rotate.svg" id="5_ck1bf"]
 [ext_resource type="Texture2D" uid="uid://cu75ovrgddboh" path="res://Main/Assets/icons/duplicate.svg" id="5_f4ntp"]
 [ext_resource type="Texture2D" uid="uid://55pwwdhwicm0" path="res://Main/Assets/icons/delete.svg" id="6_b3hc2"]
 [ext_resource type="Script" uid="uid://bi2f13frf1rc7" path="res://Main/Editor/Scripts/Exporter.gd" id="10_6yqvf"]
@@ -224,13 +227,69 @@ text = "Export
 
 "
 
-[node name="Transform" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=486229400]
+[node name="Gizmo" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=486229400]
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="move" type="Button" parent="Main/Toolbar/Contents" unique_id=1301750437]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Copy"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "
+"
+icon = ExtResource("3_h2gyp")
+icon_alignment = 1
+expand_icon = true
+
+[node name="scale" type="Button" parent="Main/Toolbar/Contents" unique_id=484669052]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Copy"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "
+"
+icon = ExtResource("4_phiig")
+icon_alignment = 1
+expand_icon = true
+
+[node name="rotate" type="Button" parent="Main/Toolbar/Contents" unique_id=750342281]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Copy"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "
+"
+icon = ExtResource("5_ck1bf")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Controls" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=470440972]
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="Node3D" type="Node3D" parent="Main/Toolbar/Contents/Controls" unique_id=1348254589]
 
 [node name="copy" type="Button" parent="Main/Toolbar/Contents" unique_id=2123476309]
 custom_minimum_size = Vector2(25, 0)
@@ -445,6 +504,31 @@ render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="Scene" parent="Main/Viewport/Viewport" unique_id=2092636286 instance=ExtResource("2_30t0y")]
+
+[node name="wip" type="AcceptDialog" parent="Main" unique_id=1912784299]
+oversampling_override = 1.0
+title = "ts is unfinished"
+initial_position = 2
+size = Vector2i(534, 548)
+ok_button_text = "contribute? 🥺please?"
+dialog_text = "PLEASE USER I NEED THIS MY GITHUB IS KINDA CONTRIBUTORLESS
+⣿⠁⠀⠀⠀⠀⢀⣤⣿⣿⣿⣷⣿⣿⣾⣶⣧⣶⣶⣄⡀
+⣿⠅⢠⡖⠀⣄⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣀
+⡁⣠⣿⠃⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⣭⢲⡤
+⠃⠿⠿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⢣⡟⢣
+        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣍
+⠚⢰⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡊⠅⠀⠀
+⡛⠇⣻⣿⣯⣭⣍⡛⠛⠛⠛⠻⣿⣿⣿⡿⠟⠿⠿⠟⠿⣛⠛⠭⠓⠈⢠⡿⣿⠀
+⠁⠀⠀⣻⠟⠭⠛⠽⠛⠖⠆⢀⢠⣽⣿⣿⣄⠀⠀⠠⡔⡞⡴⢋⠆⡁⠂⠰⢉⡛⠄
+⠀⠀⢽⢣⡄⣄⣀⣀⣠⣤⣭⣿⣿⣿⣿⣿⣷⢦⣀⠀⠀⠀⠀⠀⡀⠄⠀⠀⠀⠀⠀⠀
+⠀⠀⢪⢗⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣚⣿⣿⣿⣶⣣⠒⡀⠂⠀⠀⠀⠀
+⠀⠀⠀⡛⢿⣿⣿⣿⣿⣿⡿⠿⢿⣿⣿⠿⠟⢷⣹⢿⣿⡿⢷⠉⠄⠀⠀⠀⠀⠀⠀⠀
+⣤⡤⣄⠑⡨⠐⢯⣿⣿⣯⡀⢀⠀⠀⠀⠀⠀⠠⣿⠧⡙⠘⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀
+⡝⠉⠀⠡⢣⣛⡼⢻⢿⣿⣿⣿⣿⣷⣶⣶⣆⣷⢻⠳⣄⢠⠀⠀⠀⠀
+⣺⠇⠀⠀⠀⠁⠞⡵⢣⠌⠛⠿⢛⠻⣙⠟⠛⠫⠛⠈⠡⢘⠂⠁⠀⠀⠀
+⣿⣿⣄⠀⠀⠀⠀⠈⢑⠊⠙⠾⢿⣷⣮⣴⣿⡗⠂⢀⠂⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣦⠀⠀⠀⠀⠀⠃⠄⠀⠂⠉⠙⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+"
 
 [node name="Export" type="Panel" parent="." unique_id=675442323]
 visible = false

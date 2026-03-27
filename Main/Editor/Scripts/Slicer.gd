@@ -5,7 +5,7 @@ func slice_layer(mesh: Mesh, mesh_global_transform: Transform3D, y_min: float, y
 	var combiner = CSGCombiner3D.new()
 	var obj_csg = CSGMesh3D.new()
 	obj_csg.mesh = mesh
-	obj_csg.global_transform = mesh_global_transform  # place mesh in world space
+	obj_csg.global_transform = mesh_global_transform
 	
 	var bottom_csg = CSGMesh3D.new()
 	bottom_csg.mesh = BoxMesh.new()
@@ -22,7 +22,6 @@ func slice_layer(mesh: Mesh, mesh_global_transform: Transform3D, y_min: float, y
 	combiner.add_child(bottom_csg)
 	combiner.add_child(top_csg)
 	
-	# Mesh bounds in world space
 	var max_at = Vector3(-INF, -INF, -INF)
 	var min_at = Vector3(INF, INF, INF)
 	for v in mesh.get_faces():
@@ -35,7 +34,6 @@ func slice_layer(mesh: Mesh, mesh_global_transform: Transform3D, y_min: float, y
 	var mesh_center = mesh_global_transform.origin
 	var slab_thickness = 1000.0
 	
-	# Slicers positioned in world space Y
 	bottom_csg.global_position = Vector3(mesh_center.x, y_min - slab_thickness / 2.0, mesh_center.z)
 	bottom_csg.mesh.size = Vector3(big, slab_thickness, big)
 	bottom_csg.operation = CSGShape3D.OPERATION_SUBTRACTION
