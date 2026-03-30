@@ -144,7 +144,7 @@ func delete(objid,usehistory:bool=true):
 				create(object,props.parent.value,objid,false)
 				for i in props:
 					var v = props[i]
-					setProperty(object,i,v,false)
+					setProperty(object,i,v.value,false)
 			)
 			history.commit_action()
 		else:
