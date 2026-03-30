@@ -56,7 +56,8 @@ func setProperty(obj : editor_Main, key, value,usehistory:bool=true):
 	var edit = func(val):
 		prop.value=val
 		if key == "parent":
-			objects[val.id].children.append(obj.id)
+			if val and val is editor_Main and val.id in objects:
+				objects[val.id].children.append(obj.id)
 		if prop.has("handler"):
 			prop.handler.call(val,obj.model)
 			
