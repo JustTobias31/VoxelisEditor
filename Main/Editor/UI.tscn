@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://cu75ovrgddboh" path="res://Main/Assets/icons/duplicate.svg" id="5_f4ntp"]
 [ext_resource type="Texture2D" uid="uid://55pwwdhwicm0" path="res://Main/Assets/icons/delete.svg" id="6_b3hc2"]
 [ext_resource type="Script" uid="uid://bi2f13frf1rc7" path="res://Main/Editor/Scripts/Exporter.gd" id="10_6yqvf"]
+[ext_resource type="Texture2D" uid="uid://d4mxg2ygeiesw" path="res://Main/Assets/icons/undo.svg" id="10_kg6cy"]
+[ext_resource type="Texture2D" uid="uid://bp0ekecs3w5w3" path="res://Main/Assets/icons/Redo.svg" id="11_atu13"]
+[ext_resource type="Texture2D" uid="uid://78nxy2wqqqoc" path="res://Main/Editor/Objects/wedge/icon.svg" id="12_phiig"]
+[ext_resource type="Texture2D" uid="uid://d1s1jarax2yln" path="res://Main/Editor/Objects/sphere/icon.svg" id="13_ck1bf"]
 
 [sub_resource type="Theme" id="Theme_suv3m"]
 BoxContainer/constants/separation = 6
@@ -51,22 +55,17 @@ corner_radius_bottom_left = 5
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdlcx"]
 bg_color = Color(0.6, 0.6, 0.6, 0.42745098)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2gyp"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_engvc"]
 bg_color = Color(0.6, 0.6, 0.6, 0.19607843)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l88iq"]
 bg_color = Color(0.50980395, 0.6117647, 0.69803923, 0.47058824)
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suv3m"]
-bg_color = Color(0.50980395, 0.6117647, 0.69803923, 0.39215687)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vng3l"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.3)
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_phiig"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4ntp"]
 content_margin_left = 0.0
@@ -153,6 +152,18 @@ corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d02dc"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 500
+corner_radius_top_right = 500
+corner_radius_bottom_right = 500
+corner_radius_bottom_left = 500
+corner_detail = 5
+
 [node name="Ui" type="Control" unique_id=944202775]
 layout_mode = 3
 anchors_preset = 15
@@ -194,6 +205,10 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme = SubResource("Theme_suv3m")
 
+[node name="MarginContainer" type="MarginContainer" parent="Main/Toolbar/Contents" unique_id=1762009053]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
 [node name="File" type="Button" parent="Main/Toolbar/Contents" unique_id=452284215]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -204,7 +219,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
 text = "File"
 
-[node name="Edit" type="Button" parent="Main/Toolbar/Contents" unique_id=8310985]
+[node name="Edit" type="Button" parent="Main/Toolbar/Contents" unique_id=2081314488]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_te7nb")
@@ -212,8 +227,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
-text = "Edit
-"
+text = "Edit"
 
 [node name="Export" type="Button" parent="Main/Toolbar/Contents" unique_id=2007156475]
 custom_minimum_size = Vector2(60, 0)
@@ -228,6 +242,7 @@ text = "Export
 "
 
 [node name="Gizmo" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=486229400]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -267,6 +282,18 @@ icon = ExtResource("4_phiig")
 icon_alignment = 1
 expand_icon = true
 
+[node name="Snap" type="LineEdit" parent="Main/Toolbar/Contents" unique_id=126437991]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "0.1"
+alignment = 1
+max_length = 4
+selecting_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+
 [node name="rotate" type="Button" parent="Main/Toolbar/Contents" unique_id=750342281]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
@@ -285,11 +312,22 @@ icon = ExtResource("5_ck1bf")
 icon_alignment = 1
 expand_icon = true
 
+[node name="SnapRot" type="LineEdit" parent="Main/Toolbar/Contents" unique_id=1477378489]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+placeholder_text = "15"
+alignment = 1
+max_length = 3
+selecting_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_blink = true
+
 [node name="Controls" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=470440972]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-
-[node name="Node3D" type="Node3D" parent="Main/Toolbar/Contents/Controls" unique_id=1348254589]
 
 [node name="copy" type="Button" parent="Main/Toolbar/Contents" unique_id=2123476309]
 custom_minimum_size = Vector2(25, 0)
@@ -363,7 +401,49 @@ icon = ExtResource("6_b3hc2")
 icon_alignment = 1
 expand_icon = true
 
+[node name="History" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=2033967705]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="undo" type="Button" parent="Main/Toolbar/Contents" unique_id=1100155864]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Delete"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "
+"
+icon = ExtResource("10_kg6cy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="redo" type="Button" parent="Main/Toolbar/Contents" unique_id=1274501176]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Delete"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "
+"
+icon = ExtResource("11_atu13")
+icon_alignment = 1
+expand_icon = true
+
 [node name="Object" type="VSeparator" parent="Main/Toolbar/Contents" unique_id=1194232515]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -386,7 +466,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="cube" type="Button" parent="Main/Toolbar/Contents" unique_id=362470139]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -403,13 +483,49 @@ icon = ExtResource("4_suv3m")
 icon_alignment = 1
 expand_icon = true
 
+[node name="sphere" type="Button" parent="Main/Toolbar/Contents" unique_id=780723127]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Cube"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "
+"
+icon = ExtResource("13_ck1bf")
+icon_alignment = 1
+expand_icon = true
+
+[node name="wedge" type="Button" parent="Main/Toolbar/Contents" unique_id=1725777970]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Cube"
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "
+"
+icon = ExtResource("12_phiig")
+icon_alignment = 1
+expand_icon = true
+
 [node name="Objects" type="Panel" parent="Main" unique_id=131596055]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 60.0
-offset_right = -864.0
+offset_right = -832.0
 offset_bottom = -210.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -417,7 +533,7 @@ theme = ExtResource("1_te7nb")
 
 [node name="Title" type="Label" parent="Main/Objects" unique_id=1066141354]
 layout_mode = 1
-offset_right = 288.0
+offset_right = 320.0
 offset_bottom = 26.0
 theme = ExtResource("1_te7nb")
 text = "Scene"
@@ -429,7 +545,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 30.0
+offset_top = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(10, 0)
@@ -439,19 +555,20 @@ enable_drag_unfolding = false
 hide_root = true
 
 [node name="Properties" type="Panel" parent="Main" unique_id=219278755]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 438.0
-offset_right = -864.0
+offset_right = -832.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_te7nb")
 
 [node name="Title" type="Label" parent="Main/Properties" unique_id=692583819]
 layout_mode = 0
-offset_right = 288.0
+offset_right = 320.0
 offset_bottom = 30.0
 pivot_offset_ratio = Vector2(0.5, 0)
 theme = ExtResource("1_te7nb")
@@ -467,24 +584,30 @@ anchor_bottom = 1.0
 offset_top = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(10, 0)
 theme = ExtResource("1_te7nb")
 theme_override_constants/v_separation = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h2gyp")
 theme_override_styles/hovered = SubResource("StyleBoxFlat_engvc")
 theme_override_styles/hovered_selected = SubResource("StyleBoxFlat_l88iq")
-theme_override_styles/selected = SubResource("StyleBoxFlat_suv3m")
-theme_override_styles/selected_focus = SubResource("StyleBoxFlat_vng3l")
+theme_override_styles/selected_focus = SubResource("StyleBoxEmpty_phiig")
 columns = 2
 allow_search = false
 enable_drag_unfolding = false
 hide_root = true
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Main/Properties" unique_id=1796658186]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 62.0
+offset_right = 280.0
+offset_bottom = 155.0
 
 [node name="Viewport" type="SubViewportContainer" parent="Main" unique_id=2011329771]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 288.0
+offset_left = 319.0
 offset_top = 58.0
 offset_right = 1.0
 offset_bottom = 1.0
@@ -499,7 +622,7 @@ msaa_2d = 2
 msaa_3d = 2
 use_occlusion_culling = true
 oversampling = false
-size = Vector2i(865, 591)
+size = Vector2i(834, 591)
 render_target_clear_mode = 2
 render_target_update_mode = 4
 
@@ -529,6 +652,137 @@ dialog_text = "PLEASE USER I NEED THIS MY GITHUB IS KINDA CONTRIBUTORLESS
 ⣿⣿⣄⠀⠀⠀⠀⠈⢑⠊⠙⠾⢿⣷⣮⣴⣿⡗⠂⢀⠂⠀⠀⠀⠀⠀⠀⠀⠀
 ⣿⣿⣿⣦⠀⠀⠀⠀⠀⠃⠄⠀⠂⠉⠙⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 "
+
+[node name="save" type="FileDialog" parent="Main" unique_id=1886336635]
+oversampling_override = 1.0
+title = "Save Scene"
+initial_position = 2
+size = Vector2i(1067, 500)
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.ves")
+
+[node name="load" type="FileDialog" parent="Main" unique_id=768577725]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 2
+size = Vector2i(1067, 500)
+ok_button_text = "Load"
+file_mode = 0
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.ves")
+
+[node name="loadconfirm" type="ConfirmationDialog" parent="Main" unique_id=1631139775]
+oversampling_override = 1.0
+title = "Load project?"
+initial_position = 2
+size = Vector2i(492, 158)
+ok_button_text = "Continue"
+dialog_text = "Before loading another project, save this current one.
+
+Continue loading?"
+
+[node name="Dropdown" type="Panel" parent="Main" unique_id=620595672]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 42.0
+offset_right = 155.0
+offset_bottom = 238.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f4ntp")
+
+[node name="File" type="VBoxContainer" parent="Main/Dropdown" unique_id=1765460653]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="New" type="Button" parent="Main/Dropdown/File" unique_id=813108681]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "New project"
+alignment = 0
+
+[node name="HSeparator" type="HSeparator" parent="Main/Dropdown/File" unique_id=246395827]
+layout_mode = 2
+
+[node name="Load" type="Button" parent="Main/Dropdown/File" unique_id=32897227]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "Load project"
+alignment = 0
+
+[node name="Autosave" type="Button" parent="Main/Dropdown/File" unique_id=1083780388]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "Load autosave"
+alignment = 0
+
+[node name="Save" type="Button" parent="Main/Dropdown/File" unique_id=1518149920]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "Save project"
+alignment = 0
+
+[node name="HSeparator2" type="HSeparator" parent="Main/Dropdown/File" unique_id=1789782819]
+layout_mode = 2
+
+[node name="About" type="Button" parent="Main/Dropdown/File" unique_id=1968750284]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "About"
+alignment = 0
+
+[node name="Exit" type="Button" parent="Main/Dropdown/File" unique_id=385274938]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_te7nb")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccg01")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hnwvl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6yqvf")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rdlcx")
+text = "Exit"
+alignment = 0
 
 [node name="Export" type="Panel" parent="." unique_id=675442323]
 visible = false
@@ -1093,3 +1347,50 @@ ok_button_text = "Select"
 dialog_hide_on_ok = true
 file_mode = 2
 access = 2
+
+[node name="Toast" type="Panel" parent="." unique_id=816540337]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = 52.0
+offset_right = 150.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_d02dc")
+
+[node name="Time" type="ProgressBar" parent="Toast" unique_id=102256009]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -10.0
+offset_right = -25.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_te7nb")
+value = 100.0
+show_percentage = false
+
+[node name="Title" type="Label" parent="Toast" unique_id=314053273]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme = ExtResource("1_te7nb")
+text = "Toast"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

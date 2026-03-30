@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d00ndj50jwm0v"]
+
+[ext_resource type="Shader" uid="uid://imr5mjxdfv3g" path="res://Main/Editor/highlight.gdshader" id="1_vtgyd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryrkj"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ryrkj"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_vtgyd")
+shader_parameter/highlight = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_vtgyd"]
+radial_segments = 10
+rings = 10
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ryrkj"]
+margin = 0.01
+
+[node name="Main" type="MeshInstance3D" unique_id=949320007]
+material_override = SubResource("StandardMaterial3D_ryrkj")
+material_overlay = SubResource("ShaderMaterial_ryrkj")
+mesh = SubResource("SphereMesh_vtgyd")
+
+[node name="Ray" type="Area3D" parent="." unique_id=1472541709]
+
+[node name="Hitbox" type="CollisionShape3D" parent="Ray" unique_id=725168980]
+shape = SubResource("BoxShape3D_ryrkj")

@@ -1,5 +1,5 @@
 extends editor_3D
-class_name editor_Cube
+class_name editor_Sphere
 
 func _init():
 	super()
@@ -11,12 +11,12 @@ func _init():
 	}
 	
 	props.visible.locked=false
-	props.name.value="Cube"
-	props.classname.value="Cube"
+	props.name.value="Sphere"
+	props.classname.value="Sphere"
 	
-	icon = load("res://Main/Editor/Objects/cube/icon.svg")
+	icon = load("res://Main/Editor/Objects/sphere/icon.svg")
 	
 	deletable = true
-	description = "Cube"
-	modelasset=load("res://Main/Editor/Objects/cube/model.tscn")
+	description = "Wedge"
+	modelasset=load("res://Main/Editor/Objects/sphere/model.tscn")
 	
