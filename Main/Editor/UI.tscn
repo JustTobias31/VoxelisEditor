@@ -595,13 +595,6 @@ allow_search = false
 enable_drag_unfolding = false
 hide_root = true
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="Main/Properties" unique_id=1796658186]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 62.0
-offset_right = 280.0
-offset_bottom = 155.0
-
 [node name="Viewport" type="SubViewportContainer" parent="Main" unique_id=2011329771]
 layout_mode = 1
 anchors_preset = 15
