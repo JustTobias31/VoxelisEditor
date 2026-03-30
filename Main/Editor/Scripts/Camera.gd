@@ -10,11 +10,13 @@ var gizmoType = 1
 
 var gizmoBegin = null
 var gizmoCoord = null
-var gizmoPos = null
 var gizmoSize = null
+
+var gizmoSnap = 0.1
 
 var DragStartHit: Vector3
 var DragStartPosition: Vector3
+var DragStartScale: Vector3
 
 func Ray(exclude,mouse):
 	var space_state = get_world_3d().direct_space_state
@@ -47,8 +49,9 @@ func UpdateGizmo():
 			gizmoModel.get_node("Scale").visible=false
 			gizmoModel.get_node("Move").visible=false
 			gizmoModel.get_node("Rotate").visible=true
-	if Objects.selected and Objects.objects[Objects.selected].model:
-		gizmoModel.position=Objects.objects[Objects.selected].model.position
+	if Objects.selected and Objects.selected in Objects.objects and Objects.objects[Objects.selected].model:
+		gizmoModel.global_transform=Objects.objects[Objects.selected].model.global_transform
+		gizmoModel.scale=Vector3(50,50,50)
 	else:
 		gizmoModel.get_node("Handles").visible=false
 		gizmoModel.get_node("Scale").visible=false
@@ -78,16 +81,16 @@ func TranslateGizmo(
 	var motion = (hit - drag_start_hit).dot(axis)
 	return axis * motion
 
-func GetAxisVector(coord: String) -> Vector3:
+func GetAxisVector(coord: String, bass:Basis) -> Vector3:
 	match coord:
-		"X": return Vector3.RIGHT
-		"Y": return Vector3.UP
-		"Z": return Vector3.BACK
-	return Vector3.RIGHT
+		"X": return bass.x
+		"Y": return bass.y
+		"Z": return bass.z
+	return bass.x
 	
 ############
 func _process(_delta: float) -> void:
-	if !current or !get_meta("inputEnabled"):
+	if !current or !get_meta("inputEnabled") or get_viewport().gui_get_focus_owner() is LineEdit:
 		return
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -120,7 +123,7 @@ func _input(event):
 		#### Gizmo and select logic
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			var result
-			if Objects.selected == 0:
+			if !Objects.selected:
 				result = Ray([gizmoModel],event.position)
 				if result:
 					Objects.select(int(result.get_parent().name))
@@ -146,19 +149,14 @@ func _input(event):
 				UpdateGizmo()
 			elif result.get_parent().get_parent().get_parent()==gizmoModel:
 				gizmoBegin = event.position
-				gizmoCoord = GetAxisVector(result.get_parent().name)
 				
 				var selected = Objects.objects[Objects.selected]
 				var selectedModel = selected.model
 				
-				DragStartPosition = selectedModel.global_position
+				gizmoCoord = GetAxisVector(result.get_parent().name,selectedModel.global_basis.orthonormalized())
 				
-				match gizmoType:
-					1:
-						gizmoPos = selected.props.position.value
-					2:
-						gizmoPos = selected.props.position.value
-						gizmoSize = selected.props.size.value
+				DragStartPosition = selectedModel.global_position
+				DragStartScale = selectedModel.scale
 				
 				var toCam = (global_position - selectedModel.global_position).normalized()
 				var planeNormal = gizmoCoord.cross(toCam).cross(gizmoCoord).normalized()
@@ -171,30 +169,52 @@ func _input(event):
 			else:
 				Objects.select(null)
 				UpdateGizmo()
-		elif !event.pressed and gizmoCoord:
+		elif !event.pressed and gizmoCoord: ## Stop gizmo movement
+			var selobj = Objects.objects[Objects.selected]
+			Objects.setProperty(selobj, "size", selobj.model.scale)
+			Objects.setProperty(selobj, "position", selobj.model.position)
+			
 			gizmoBegin=null
 			gizmoCoord=null
-			gizmoPos=null
 			gizmoSize=null
 			
 	elif event is InputEventMouseMotion and gizmoCoord: ## Apply gizmo transform
 		match gizmoType:
 			1:
+				var selobj = Objects.objects[Objects.selected]
+				var model:Node3D = selobj.model
 				var out = TranslateGizmo(
 					gizmoCoord,
 					event.position,
 					self,
 					DragStartHit,
 				)
-				Objects.setProperty(Objects.objects[Objects.selected], "position", gizmoPos+out)
+				var newpos = DragStartPosition +  out
+				model.global_position = Vector3(snapped(newpos.x,gizmoSnap),snapped(newpos.y,gizmoSnap),snapped(newpos.z,gizmoSnap))
+				
 			2:
-				var selobj:editor_Main = Objects.objects[Objects.selected]
+				var selobj = Objects.objects[Objects.selected]
+				var model:Node3D = selobj.model
 				var out = TranslateGizmo(
 					gizmoCoord,
 					event.position,
 					self,
 					DragStartHit,
 				)
-				Objects.setProperty(selobj, "size", gizmoSize+out)
-				if gizmoCoord == Vector3.UP:
-					Objects.setProperty(selobj, "position", gizmoPos+Vector3(0,out.y/2,0))
+				var motion = out.dot(gizmoCoord)
+				var localAxis = model.global_basis.orthonormalized().inverse() * gizmoCoord
+				var newscale = DragStartScale + localAxis.abs() * motion
+				var bass = model.global_basis.orthonormalized()
+				
+				if Input.is_key_pressed(KEY_SHIFT):
+					match gizmoCoord:
+						bass.x:
+							model.scale = Vector3(snapped(newscale.x,gizmoSnap),snapped(newscale.y,gizmoSnap),snapped(newscale.x,gizmoSnap)).clamp(Vector3(0.001,0.001,0.001),Vector3(500,500,500))
+						bass.y:
+							model.scale = Vector3(snapped(newscale.y,gizmoSnap),snapped(newscale.y,gizmoSnap),snapped(newscale.y,gizmoSnap)).clamp(Vector3(0.001,0.001,0.001),Vector3(500,500,500))
+						bass.z:
+							model.scale = Vector3(snapped(model.scale.x,gizmoSnap),snapped(newscale.z,gizmoSnap),snapped(newscale.z,gizmoSnap)).clamp(Vector3(0.001,0.001,0.001),Vector3(500,500,500))
+				else:
+					model.scale = Vector3(snapped(newscale.x,gizmoSnap),snapped(newscale.y,gizmoSnap),snapped(newscale.z,gizmoSnap)).clamp(Vector3(0.001,0.001,0.001),Vector3(500,500,500))
+				
+				

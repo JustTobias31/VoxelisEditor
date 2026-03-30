@@ -55,6 +55,9 @@ albedo_color = Color(0.41568628, 1, 0.4862745, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_liyct"]
 size = Vector3(0.05, 0.05, 0.05)
 
+[sub_resource type="BoxMesh" id="BoxMesh_yh5la"]
+size = Vector3(0.1, 0.1, 0.01)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_ib3t1"]
 top_radius = 0.0
 bottom_radius = 0.03
@@ -136,7 +139,6 @@ transform = Transform3D(1, 0, 0, 0, 1, -2.5055616e-22, 0, -2.5055616e-22, 1, 0, 
 shape = SubResource("BoxShape3D_yh5la")
 
 [node name="Scale" type="Node3D" parent="Gizmo" unique_id=926185861]
-visible = false
 
 [node name="Y" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=451801055]
 transform = Transform3D(1.9106855e-15, -1.7484555e-07, -1, -4.371139e-08, 1, -1.7484555e-07, 1, 4.371139e-08, -5.7320566e-15, -3.9790713e-08, 0.3034351, 0)
@@ -148,12 +150,23 @@ transform = Transform3D(-4.371139e-08, 1, -1.3113416e-07, 0, 1.3113416e-07, 1, 1
 material_override = SubResource("StandardMaterial3D_eunhr")
 mesh = SubResource("BoxMesh_liyct")
 
+[node name="ShiftX" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=1561735349]
+transform = Transform3D(-4.371139e-08, 1, -1.3113416e-07, 0, 1.3113416e-07, 1, 1, 4.371139e-08, -5.7320566e-15, 0.16343515, 0, 0.13999996)
+material_override = SubResource("StandardMaterial3D_eunhr")
+mesh = SubResource("BoxMesh_yh5la")
+
+[node name="ShiftZ" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=1508490575]
+transform = Transform3D(1.910687e-15, 8.742277e-08, 1, 4.371139e-08, -1, 8.742277e-08, 1, 4.371139e-08, -5.7320566e-15, 0.003435154, 0.14, 0.13999996)
+material_override = SubResource("StandardMaterial3D_yh5la")
+mesh = SubResource("BoxMesh_yh5la")
+
 [node name="Z" type="MeshInstance3D" parent="Gizmo/Scale" unique_id=1560160040]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.3034351)
 material_override = SubResource("StandardMaterial3D_yh5la")
 mesh = SubResource("BoxMesh_liyct")
 
 [node name="Move" type="Node3D" parent="Gizmo" unique_id=938271708]
+visible = false
 
 [node name="Z" type="MeshInstance3D" parent="Gizmo/Move" unique_id=673406303]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.3034351)

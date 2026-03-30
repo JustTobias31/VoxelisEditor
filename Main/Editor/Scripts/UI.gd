@@ -4,6 +4,7 @@ extends Node
 @onready var tree = $Objects/Tree
 var root
 var objlist = {}
+var toasts = 0
 
 func create_tree_item(_item, _parent_item):
 	var item : TreeItem = tree.create_item(_parent_item)
@@ -15,14 +16,34 @@ func create_tree_item(_item, _parent_item):
 
 func NewObject(obj,parent):
 	var item
-	if objlist.has(obj.id):
+	if objlist.has(obj.id) and objlist[obj.id]:
 		objlist[obj.id].free()
+		objlist.erase(obj.id)
 	
 	if parent:
 		item = create_tree_item(obj, objlist[parent.id])
 	else:
 		item = create_tree_item(obj, root)
 	objlist[obj.id] = item
+
+func ShowToast(text):
+	toasts += 1
+	print(text)
+	var tween = get_tree().create_tween()
+	var toast = $"../Toast".duplicate(DuplicateFlags.DUPLICATE_DEFAULT)
+	
+	$"..".add_child(toast)
+	toast.visible=true
+	toast.get_node("Title").text=text
+	
+	tween.tween_property(toast,"position",Vector2(toast.position.x,650-70*toasts),0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(toast.get_node("Time"),"value",0,3)
+	tween.chain().tween_property(toast,"position",Vector2(toast.position.x,700),0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback(func():
+		toasts -= 1
+		toast.queue_free()
+	)
+	tween.play()
 
 ###### Properties
 @onready var props = $Properties/Tree
@@ -42,6 +63,15 @@ func create_prop_item(obj:editor_Main,propname):
 			
 			if prop.locked:
 				item.set_custom_color(1,Color.WEB_GRAY)
+		TYPE_FLOAT:
+			item.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
+			item.set_text(1, str(snapped(prop.value,0.01)))
+			item.set_editable(1,!prop.locked)
+			item.set_meta("obj",obj.id)
+			
+			if prop.locked:
+				item.set_custom_color(1,Color.WEB_GRAY)
+				
 		TYPE_VECTOR3:
 			item.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
 			item.set_text(1, "Vector3")
@@ -53,7 +83,7 @@ func create_prop_item(obj:editor_Main,propname):
 			
 			x.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
 			x.set_editable(1,!prop.locked)
-			x.set_text(1,str(snapped(prop.value.x,0.001)))
+			x.set_text(1,str(snapped(prop.value.x,0.01)))
 			
 			x.set_meta("dimension","x")
 			x.set_meta("obj",obj.id)
@@ -65,7 +95,7 @@ func create_prop_item(obj:editor_Main,propname):
 			
 			y.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
 			y.set_editable(1,!prop.locked)
-			y.set_text(1,str(snapped(prop.value.y,0.001)))
+			y.set_text(1,str(snapped(prop.value.y,0.01)))
 			
 			y.set_meta("dimension","y")
 			y.set_meta("obj",obj.id)
@@ -77,7 +107,7 @@ func create_prop_item(obj:editor_Main,propname):
 			
 			z.set_cell_mode(1, TreeItem.CELL_MODE_STRING)
 			z.set_editable(1,!prop.locked)
-			z.set_text(1,str(snapped(prop.value.z,0.001)))
+			z.set_text(1,str(snapped(prop.value.z,0.01)))
 			
 			z.set_meta("dimension","z")
 			z.set_meta("prop",propname)
@@ -140,6 +170,14 @@ func render_props(obj):
 	for i in objprops:
 		proplist[i]=create_prop_item(obj,i)
 
+func ShowDropdown(button:Button,type:String):
+	for i in $Dropdown.get_children():
+		i.visible=false
+	$Dropdown.get_node(type).visible=true
+	$Dropdown.visible=true
+	$Dropdown.position=Vector2(button.position.x,$Dropdown.position.y)
+	
+
 ######################
 var clipboard = null
 var controls = {
@@ -158,33 +196,126 @@ var controls = {
 	"new" = func():
 		pass
 }
+@onready var exportui = $"../Export"
+@onready var camera = $Viewport/Viewport/Scene/Camera
+func LoadPath(path):
+	var out = Save.Load(path, true)
+	if out is String:
+		ShowToast("Load failed ("+out+").")
+		return
+	
+	for i in Objects.objects:
+		Objects.delete(i)
+	await get_tree().create_timer(0.5).timeout
+	
+	Save.Load(path)
+	Save.unsaved = false
+	ShowToast("Project loaded successfuly!")
 
 func toolbar():
-	var exportui = $"../Export"
-	var camera = $Viewport/Viewport/Scene/Camera
 	###
-	$Toolbar/Contents/File.button_down.connect(func(): $wip.popup_centered())
+	$Toolbar/Contents/File.button_down.connect(func(): ShowDropdown($Toolbar/Contents/File,"File") )
 	$Toolbar/Contents/Edit.button_down.connect(func(): $wip.popup_centered())
 	$Toolbar/Contents/Export.button_down.connect(func():
 		exportui.visible=true
 	)
+	
+	
 	### Gizmos
 	$Toolbar/Contents/move.button_down.connect(func(): camera.gizmoType = 1)
 	$Toolbar/Contents/scale.button_down.connect(func(): camera.gizmoType = 2)
+	$Toolbar/Contents/Snap.text_submitted.connect(func(txt:String):
+		if txt.is_valid_float():
+			var val = snapped(clamp(float(txt),0.01,5),0.01)
+			camera.gizmoSnap=val
+		$Toolbar/Contents/Snap.text=str(snapped(camera.gizmoSnap,0.01))
+	)
+	$Toolbar/Contents/Snap.text=str(snapped(camera.gizmoSnap,0.01))
+	
 	$Toolbar/Contents/rotate.button_down.connect(func(): $wip.popup_centered())
+	$Toolbar/Contents/SnapRot.text_submitted.connect(func(_txt:String):
+		$wip.popup_centered()
+	)
 	### Controls
 	$Toolbar/Contents/copy.button_down.connect(controls.copy)
 	$Toolbar/Contents/paste.button_down.connect(controls.paste)
 	$Toolbar/Contents/duplicate.button_down.connect(controls.dupe)
 	$Toolbar/Contents/delete.button_down.connect(controls.delete)
+	### History
+	$Toolbar/Contents/undo.button_down.connect(func(): Objects.history.undo() )
+	$Toolbar/Contents/redo.button_down.connect(func(): Objects.history.redo() )
 	### Object
-	$Toolbar/Contents/Add.button_down.connect(controls.new)
-	$Toolbar/Contents/cube.button_down.connect(func():
-		Objects.create(editor_Cube.new())
+	$Toolbar/Contents/Add.button_down.connect(func(): $wip.popup_centered())
+	
+	$Toolbar/Contents/cube.button_down.connect(func(): Objects.create(editor_Cube.new()) )
+	$Toolbar/Contents/wedge.button_down.connect(func(): Objects.create(editor_Wedge.new()) )
+	$Toolbar/Contents/sphere.button_down.connect(func(): Objects.create(editor_Sphere.new()) )
+
+func Dropdown():
+	### File
+	# Load
+	$Dropdown/File/New.button_down.connect(func():
+		$Dropdown.visible=false
+		if $loadconfirm.visible: return
+		if Save.unsaved:
+			$loadconfirm.set_meta("path","res://Main/Assets/default.ves")
+			$loadconfirm.popup_centered()
+		else:
+			LoadPath("res://Main/Assets/default.ves")
+	)
+	$Dropdown/File/Autosave.button_down.connect(func():
+		$Dropdown.visible=false
+		if $loadconfirm.visible: return
+		if Save.unsaved:
+			$loadconfirm.set_meta("path","user://autosave.ves")
+			$loadconfirm.popup_centered()
+		else:
+			LoadPath("user://autosave.ves")
+	)
+	$Dropdown/File/Load.button_down.connect(func():
+		$Dropdown.visible=false
+		if $loadconfirm.visible: return
+		
+		if Save.unsaved:
+			$loadconfirm.remove_meta("path")
+			$loadconfirm.popup_centered()
+		else:
+			$load.popup_centered()
 	)
 	
+	
+	$loadconfirm.confirmed.connect(func():
+		if $loadconfirm.has_meta("path"):
+			LoadPath($loadconfirm.get_meta("path"))
+		else:
+			$load.popup_centered()
+	)
+	
+	$load.file_selected.connect(func(path):
+		LoadPath(path)
+	)
+	
+	# Save
+	$Dropdown/File/Save.button_down.connect(func():
+		if $loadconfirm.visible: return
+		$save.popup_centered()
+	)
+	
+	$save.file_selected.connect(func(path):
+		var out = Save.Save(path)
+		if out == true:
+			ShowToast("Project saved successfuly!")
+		else:
+			ShowToast("Save failed ("+out+").")
+	)
+	
+
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("editor_Copy",false,true):
+	if event is InputEventMouseButton and event.pressed and $Dropdown.visible:
+		await get_tree().process_frame
+		$Dropdown.visible=false
+	
+	elif event.is_action_pressed("editor_Copy",false,true):
 		controls.copy.call()
 	elif event.is_action_pressed("editor_Paste",false,true):
 		controls.paste.call()
@@ -192,9 +323,18 @@ func _input(event: InputEvent) -> void:
 		controls.delete.call()
 	elif event.is_action_pressed("editor_Duplicate",false,true):
 		controls.dupe.call()
+	elif event.is_action_pressed("gizmo_Move",false,true):
+		camera.gizmoType = 1
+	elif event.is_action_pressed("gizmo_Size",false,true):
+		camera.gizmoType = 2
+	elif event.is_action_pressed("editor_Undo",false,true):
+		Objects.history.undo()
+	elif event.is_action_pressed("editor_Redo",false,true):
+		Objects.history.redo()
 
 func _ready() -> void:
 	toolbar()
+	Dropdown()
 	###### Scene viewer
 	tree.hide_root = true
 	root = tree.create_item()
@@ -209,11 +349,16 @@ func _ready() -> void:
 	)
 	Objects.reselect.connect(func(id):
 		tree.deselect_all()
-		if id:
+		if id and objlist.has(id):
 			tree.set_selected(objlist[id],0)
 	)
-	Objects.deleted.connect(func(obj,id):
-		objlist[obj.id].free()
+	Objects.deleted.connect(func(obj, id):
+		if objlist.has(obj.id) and is_instance_valid(objlist[obj.id]):
+			objlist[obj.id].free()
+			objlist.erase(obj.id)
+		for child_id in objlist.keys():
+			if not is_instance_valid(objlist[child_id]):
+				objlist.erase(child_id)
 	)
 	tree.cell_selected.connect(func():
 		if tree.get_selected().get_meta("id") and Objects.objects[tree.get_selected().get_meta("id")] and Objects.selected != tree.get_selected().get_meta("id"):
@@ -221,7 +366,10 @@ func _ready() -> void:
 	)
 	###### Property viewer
 	props.hide_root = true
+	props.clip_contents=true
+	
 	root2 = props.create_item()
+	
 	Objects.reselect.connect(func(id):
 		if id:
 			render_props(Objects.objects[id])

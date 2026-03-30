@@ -3,14 +3,18 @@
 [ext_resource type="FontFile" uid="uid://d2qqtukcmeo2p" path="res://Main/Assets/font.ttf" id="1_xt60p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4ce3"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_bottom = 2
-expand_margin_top = 15.0
+content_margin_top = 5.0
+bg_color = Color(0.2520276, 0.25202766, 0.25202763, 1)
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmfic"]
-content_margin_top = 15.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
+content_margin_top = 5.0
+bg_color = Color(0.2520276, 0.25202766, 0.25202763, 1)
 border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ih0wh"]
 bg_color = Color(0.18717611, 0.18717617, 0.18717602, 1)
@@ -65,12 +69,12 @@ Tree/colors/children_hl_line_color = Color(0, 0, 0, 1)
 Tree/colors/custom_button_font_highlight = Color(0, 0, 0, 1)
 Tree/colors/drop_position_color = Color(1, 1, 1, 0)
 Tree/colors/font_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
-Tree/colors/font_disabled_color = Color(0.65423185, 0.65423214, 0.6542318, 1)
+Tree/colors/font_disabled_color = Color(0.65, 0.65, 0.65, 1)
 Tree/colors/font_hovered_color = Color(1, 1, 1, 1)
-Tree/colors/font_hovered_dimmed_color = Color(1, 1, 1, 1)
+Tree/colors/font_hovered_dimmed_color = Color(1, 1, 1, 0)
 Tree/colors/font_hovered_selected_color = Color(1, 1, 1, 1)
 Tree/colors/font_outline_color = Color(0, 0, 0, 0)
-Tree/colors/font_selected_color = Color(0.84313726, 0.84313726, 0.84313726, 1)
+Tree/colors/font_selected_color = Color(0.84, 0.84, 0.84, 1)
 Tree/colors/guide_color = Color(0, 0, 0, 0)
 Tree/colors/parent_hl_line_color = Color(0, 0, 0, 1)
 Tree/colors/relationship_line_color = Color(0, 0, 0, 1)
