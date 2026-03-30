@@ -258,10 +258,10 @@ func Dropdown():
 		$Dropdown.visible=false
 		if $loadconfirm.visible: return
 		if Save.unsaved:
-			$loadconfirm.set_meta("path","res://Main/Assets/default.ves")
+			$loadconfirm.set_meta("path","res://default.ves")
 			$loadconfirm.popup_centered()
 		else:
-			LoadPath("res://Main/Assets/default.ves")
+			LoadPath("res://default.ves")
 	)
 	$Dropdown/File/Autosave.button_down.connect(func():
 		$Dropdown.visible=false
