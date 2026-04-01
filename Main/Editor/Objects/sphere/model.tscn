@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://d00ndj50jwm0v"]
 
 [ext_resource type="Shader" uid="uid://imr5mjxdfv3g" path="res://Main/Editor/highlight.gdshader" id="1_vtgyd"]
+[ext_resource type="Texture2D" uid="uid://julnibajrcgy" path="res://Main/Editor/Objects/sphere/Screenshot_2026-03-26_110216.png" id="2_7jexu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryrkj"]
 resource_local_to_scene = true
+albedo_texture = ExtResource("2_7jexu")
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+uv2_scale = Vector3(0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryrkj"]
 resource_local_to_scene = true

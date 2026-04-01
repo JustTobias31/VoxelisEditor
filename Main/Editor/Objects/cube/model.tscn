@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://r7451irkcbsn"]
 
+[ext_resource type="Texture2D" uid="uid://4idi1revshdl" path="res://Main/Editor/Objects/cube/block.jpeg" id="1_6e2pi"]
 [ext_resource type="Shader" uid="uid://imr5mjxdfv3g" path="res://Main/Editor/highlight.gdshader" id="1_ryrkj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryrkj"]
 resource_local_to_scene = true
+albedo_texture = ExtResource("1_6e2pi")
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(0.5, 0, 0.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryrkj"]
 resource_local_to_scene = true
