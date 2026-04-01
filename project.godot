@@ -19,7 +19,6 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.068798296, 0.06879827, 0.068798244, 1)
 boot_splash/image="uid://cks0a5iwuwcg7"
 config/icon="uid://b3m46lxh1no8c"
-boot_splash/minimum_display_time=5000
 
 [autoload]
 
@@ -113,7 +112,6 @@ editor_Redo={
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_3d=2

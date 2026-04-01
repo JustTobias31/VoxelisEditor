@@ -156,6 +156,6 @@ func delete(objid,usehistory:bool=true):
 
 func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
-	Save.Load("res://default.ves")
+	await Save.Load("res://default.ves")
 	Save.unsaved=false
 	

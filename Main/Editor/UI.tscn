@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://bp0ekecs3w5w3" path="res://Main/Assets/icons/Redo.svg" id="11_atu13"]
 [ext_resource type="Texture2D" uid="uid://78nxy2wqqqoc" path="res://Main/Editor/Objects/wedge/icon.svg" id="12_phiig"]
 [ext_resource type="Texture2D" uid="uid://d1s1jarax2yln" path="res://Main/Editor/Objects/sphere/icon.svg" id="13_ck1bf"]
+[ext_resource type="Texture2D" uid="uid://cks0a5iwuwcg7" path="res://Main/Assets/boot.png" id="18_rdlcx"]
+[ext_resource type="FontFile" uid="uid://ddie450sahuyi" path="res://Main/Assets/boot.ttf" id="19_hnwvl"]
 
 [sub_resource type="Theme" id="Theme_suv3m"]
 BoxContainer/constants/separation = 6
@@ -92,6 +94,20 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_bottom = 1
 expand_margin_right = 20.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpncn"]
+content_margin_top = 15.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipc3m"]
+content_margin_top = 15.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3ixa"]
+content_margin_top = 15.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3hc2"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -163,6 +179,9 @@ corner_radius_top_right = 500
 corner_radius_bottom_right = 500
 corner_radius_bottom_left = 500
 corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_d02dc"]
+font = ExtResource("19_hnwvl")
 
 [node name="Ui" type="Control" unique_id=944202775]
 layout_mode = 3
@@ -1078,6 +1097,9 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(1, 0)
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_hpncn")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_ipc3m")
+theme_override_styles/focus = SubResource("StyleBoxFlat_x3ixa")
 placeholder_text = "100"
 alignment = 1
 max_length = 6
@@ -1102,6 +1124,9 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(1, 0)
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_hpncn")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_ipc3m")
+theme_override_styles/focus = SubResource("StyleBoxFlat_x3ixa")
 placeholder_text = "20"
 alignment = 1
 max_length = 6
@@ -1130,6 +1155,9 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(1, 0)
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_hpncn")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_ipc3m")
+theme_override_styles/focus = SubResource("StyleBoxFlat_x3ixa")
 placeholder_text = "1048"
 alignment = 1
 max_length = 6
@@ -1152,6 +1180,9 @@ grow_vertical = 0
 pivot_offset_ratio = Vector2(1, 0)
 theme = ExtResource("1_te7nb")
 theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_hpncn")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_ipc3m")
+theme_override_styles/focus = SubResource("StyleBoxFlat_x3ixa")
 placeholder_text = "1048"
 alignment = 1
 max_length = 6
@@ -1387,3 +1418,71 @@ text = "Toast"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Loading" type="Panel" parent="." unique_id=1477610091]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -125.0
+offset_right = 250.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_te7nb")
+theme_override_styles/panel = SubResource("StyleBoxFlat_f4ntp")
+
+[node name="TextureRect" type="TextureRect" parent="Loading" unique_id=1869553965]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -125.0
+offset_right = 200.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_rdlcx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spin" type="Label" parent="Loading" unique_id=1503560962]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -70.0
+offset_right = 20.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+text = ""
+label_settings = SubResource("LabelSettings_d02dc")
+horizontal_alignment = 1
+visible_characters = 1
+
+[node name="Desc" type="Label" parent="Loading" unique_id=417992766]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -35.0
+offset_right = 250.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_te7nb")
+text = "Loading project..."
+horizontal_alignment = 1

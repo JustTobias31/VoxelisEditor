@@ -4,6 +4,7 @@ extends Node
 @onready var tree = $Objects/Tree
 var root
 var objlist = {}
+var loading = "nulla"
 var toasts = 0
 
 func create_tree_item(_item, _parent_item):
@@ -45,6 +46,8 @@ func ShowToast(text):
 	)
 	tween.play()
 
+const spin = ""
+	
 ###### Properties
 @onready var props = $Properties/Tree
 var root2
@@ -199,7 +202,7 @@ var controls = {
 @onready var exportui = $"../Export"
 @onready var camera = $Viewport/Viewport/Scene/Camera
 func LoadPath(path):
-	var out = Save.Load(path, true)
+	var out = await Save.Load(path, true)
 	if out is String:
 		ShowToast("Load failed ("+out+").")
 		return
@@ -208,7 +211,7 @@ func LoadPath(path):
 		Objects.delete(i)
 	await get_tree().create_timer(0.5).timeout
 	
-	Save.Load(path)
+	await Save.Load(path)
 	Save.unsaved = false
 	ShowToast("Project loaded successfuly!")
 
@@ -268,6 +271,7 @@ func Dropdown():
 		if $loadconfirm.visible: return
 		if Save.unsaved:
 			$loadconfirm.set_meta("path","user://autosave.ves")
+			
 			$loadconfirm.popup_centered()
 		else:
 			LoadPath("user://autosave.ves")
@@ -446,4 +450,18 @@ func _ready() -> void:
 					var new = edited.get_text(1)
 					Objects.setProperty(obj,prop,new)
 	)
+	var index = 1
+	while true:
+		await get_tree().create_timer(0.03,false,true).timeout
+		
+		if !Save.loading:
+			$"../Loading".visible=false
+			continue
+		$"../Loading".visible=true
+		
+		index += 1
+		if index>spin.length():
+			index=1
+		$"../Loading/Spin".text=spin.substr(index,1)
+		
 	

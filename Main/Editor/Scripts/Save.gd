@@ -3,6 +3,7 @@ extends Node
 var version = 1
 
 var unsaved = false
+var loading = false
 
 var history = []
 var pointer = 0
@@ -59,17 +60,20 @@ func Load(path, dry_run = false):
 	
 	if dry_run:
 		return true 
+	loading = true
 	Objects.history.clear_history()
 	for uid in cfg.get_sections():
 		if uid == "meta":
 			continue
 		Objects.create(Objects.index[cfg.get_value(uid,"classname")].new(), null, int(uid))
+		await get_tree().process_frame
 		
 	for uid in cfg.get_sections():
 		if uid == "meta":
 			continue
 		var obj = Objects.objects[int(uid)]
 		for prop in cfg.get_section_keys(uid):
+			await get_tree().process_frame
 			if prop != "classname":
 				var val:String = cfg.get_value(uid,prop)
 				var type = val.split("/",false,1)
@@ -98,6 +102,7 @@ func Load(path, dry_run = false):
 					_:
 						Objects.setProperty(obj,prop,type_convert(val,type),false)
 	Objects.history.clear_history()
+	loading=false
 	return true
 
 func checksum(cfg: ConfigFile):
